@@ -33,3 +33,6 @@
 
 # Shaders
 *.spv
+
+# vscode
+.vscode
