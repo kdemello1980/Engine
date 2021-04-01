@@ -1,4 +1,4 @@
-#include "../include/Common.h"
+#include "Common.h"
 
 #include <string>
 #include <cstring>
