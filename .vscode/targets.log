@@ -1,0 +1,565 @@
+make all -f /data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+ 
+# GNU Make 4.3
+# Built for x86_64-suse-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Thu Apr  1 10:56:34 2021
+
+# Variables
+
+# environment
+JAVA_HOME = /usr/java/jdk1.8.0_251-amd64
+# environment
+QEMU_AUDIO_DRV = pa
+# environment
+NO_AT_BRIDGE = 1
+# environment
+GTK_RC_FILES = /etc/gtk/gtkrc:/data/home/kenneth/.gtkrc:/data/home/kenneth/.config/gtkrc
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1001/vscode-ipc-53056284-ac7e-40bc-952e-bd058803799a.sock
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 9)
+SRC_DIR := src
+# environment
+WINDOWMANAGER = /usr/bin/startplasma-x11
+# environment
+GPG_TTY = not a tty
+# environment
+MACHTYPE = x86_64-suse-linux
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 13)
+APP = Engine
+# default
+MAKE_COMMAND := make
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+PYTHONSTARTUP = /etc/pythonstart
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /data/home/kenneth/Desktop/Programming/vulkan/Engine
+# environment
+HOST = alcyone
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+MORE = -sl
+# environment
+HOSTNAME = alcyone
+# environment
+MAIL = /var/spool/mail/kenneth
+# environment
+XNLSPATH = /usr/share/X11/nls
+# environment
+XDG_DATA_DIRS = /data/home/kenneth/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+# environment
+PROFILEREAD = true
+# environment
+SSH_ASKPASS = /usr/libexec/ssh/ssh-askpass
+# environment
+LANG = C
+# environment
+XAUTHORITY = /run/user/1001/xauth_BDUWlI
+# default
+.LOADED := 
+# environment
+FROM_HEADER = 
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /data/home/kenneth/Desktop/Programming/vulkan/Engine
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+LESSOPEN = lessopen.sh %s
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /tmp/ssh-h12wpmUYnCz2/agent.9892
+# default
+.SHELLFLAGS := -c
+# environment
+HISTSIZE = 1000
+# environment
+XDG_CONFIG_DIRS = /etc/xdg:/usr/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XCURSOR_THEME = Adwaita
+# environment
+LESSKEY = /usr/etc/lesskey.bin
+# environment
+XDG_SESSION_DESKTOP = KDE
+# environment
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=ee387b25-e42c-4008-af86-0f090f31548b&iid=ee387b25-e42c-4008-af86-0f090f31548b&sid=ee387b25-e42c-4008-af86-0f090f31548b","uploadToServer":true}
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 1)
+MAKEFILE_LIST := /data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 15)
+OBJD = src/Debug
+# environment
+VSCODE_PID = 3819
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+XAUTHLOCALHOSTNAME = alcyone
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+INPUT_METHOD = ibus
+# environment
+SDK_HOME = /usr/lib64/jvm/java
+# environment
+SESSION_MANAGER = local/alcyone:@/tmp/.ICE-unix/10090,unix/alcyone:/tmp/.ICE-unix/10090
+# automatic
+*F = $(notdir $*)
+# environment
+MANPATH = /usr/local/man:/usr/local/share/man:/usr/share/man
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1001/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+JAVA_ROOT = /usr/lib64/jvm/java
+# environment
+LESS_ADVANCED_PREPROCESSOR = no
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 16)
+BIND = bin/Debug
+# environment
+JAVA_BINDIR = /usr/lib64/jvm/java/bin
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 4)
+INCLUDE = -Iinclude -I/data/system-software/stb -I/data/system-software/tinyobjloader -I/data/system-software/json/include/ -I/data/system-software/SDL2/include/SDL2 -I/data/system-software/VulkanMemoryAllocator/src
+# environment
+BREAKPAD_DUMP_LOCATION = /data/home/kenneth/.config/Code/exthost Crash Reports
+# default
+MAKE_HOST := x86_64-suse-linux-gnu
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 10)
+COMPILER = clang++
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /data/home/kenneth/.cargo/bin:/data/home/kenneth/.cargo/bin:/usr/java/jdk1.8.0_251-amd64/bin:/data/home/kenneth/bin:/usr/local/bin:/usr/bin:/bin:/data/home/kenneth/.dotnet/tools:/data/home/kenneth/bin:/export/home/kenneth/.dotnet/tools:/data/home/kenneth/.local/bin:/data/home/kenneth/.local/bin:/data/home/kenneth/bin:/export/home/kenneth/.dotnet/tools
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# environment
+CHOKIDAR_USEPOLLING = 1
+# environment
+OSTYPE = linux
+# environment
+VSCODE_LOG_NATIVE = false
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 2)
+CFLAGS_DEBUG = -std=c++20 -g
+# environment
+MINICOM = -c on
+# environment
+CPU = x86_64
+# environment
+LESSCLOSE = lessclose.sh %s %s
+# automatic
+?F = $(notdir $?)
+# environment
+KDE_APPLICATIONS_AS_SCOPE = 1
+# environment
+XDG_SEAT = seat0
+# environment
+XSESSION_IS_UP = yes
+# environment
+GTK_IM_MODULE = ibus
+# environment
+XDG_CURRENT_DESKTOP = KDE
+# environment
+HOSTTYPE = x86_64
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# automatic
++F = $(notdir $+)
+# environment
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# environment
+LESS = -M -I -R
+# environment
+DESKTOP_SESSION = /usr/share/xsessions/plasma5
+# environment
+CONFIG_SITE = /usr/share/site/x86_64-unknown-linux-gnu
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = KDE
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+QT_SCREEN_SCALE_FACTORS = DVI-D-0=1.25;HDMI-0=1.25;DP-0=1.25;DP-1=1.25;DP-2=1.25;DP-3=1.25;DP-4=1.25;DP-5=1.25;
+# environment
+LOGNAME = kenneth
+# environment
+QT_IM_SWITCHER = imsw-multi
+# environment
+AUDIODRIVER = pulseaudio
+# environment
+G_FILENAME_ENCODING = @locale,UTF-8,ISO-8859-15,CP1252
+# environment
+XDG_VTNR = 7
+# makefile
+.DEFAULT_GOAL := Release
+# environment
+DISPLAY = :0
+# environment
+GTK_MODULES = canberra-gtk-module
+# environment
+USER = kenneth
+# default
+MAKE_VERSION := 4.3
+# environment
+KDE_SESSION_UID = 1001
+# environment
+SDL_AUDIODRIVER = pulse
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 3)
+LDFLAGS = -lSDL2 -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi
+# environment
+CVS_RSH = ssh
+# environment
+SSH_AGENT_PID = 9979
+# environment
+PAGER = less
+# environment
+VSCODE_NODE_CACHED_DATA_DIR = /data/home/kenneth/.config/Code/CachedData/2b9aebd5354a3629c3aba0a5f5df49f43d6689f8
+# environment
+_ = /usr/bin/make
+# environment
+XDG_RUNTIME_DIR = /run/user/1001
+# environment
+define BASH_FUNC_mc%%
+() {  . /usr/share/mc/mc-wrapper.sh
+}
+endef
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 1)
+CFLAGS = -Wall -std=c++20 -O2
+# environment
+G_BROKEN_FILENAMES = 1
+# environment
+COLORTERM = 1
+# environment
+GTK_OVERLAY_SCROLLING = 0
+ 
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+XKEYSYMDB = /usr/X11R6/lib/X11/XKeysymDB
+# environment
+GTK2_RC_FILES = /etc/gtk-2.0/gtkrc:/data/home/kenneth/.gtkrc-2.0:/data/home/kenneth/.config/gtkrc-2.0
+# environment
+HOME = /data/home/kenneth
+# environment
+QT_IM_MODULE = ibus
+# environment
+CSHEDIT = emacs
+# environment
+JDK_HOME = /usr/lib64/jvm/java
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1001/vscode-aca0bb59-1.54.3-main.sock
+# environment
+TERM = xterm
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 7)
+GLSLC = /data/system-software/glslc/bin/glslc
+# environment
+XDG_SESSION_ID = 2
+# environment
+XCURSOR_SIZE = 32
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# environment
+PILOTPORT = usb:
+# default
+SUFFIXES := 
+# environment
+QT_AUTO_SCREEN_SCALE_FACTOR = 0
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 8)
+SHADER_PATH = shaders
+# environment
+LS_OPTIONS = -N --color=tty -T 0
+# environment
+KDE_SESSION_VERSION = 5
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+QT4_IM_MODULE = xim
+# environment
+KDE_FULL_SESSION = true
+# makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 18)
+DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorPoolDebug AllocatorDebug
+# environment
+JRE_HOME = /usr/lib64/jvm/java
+# variable set hash-table stats:
+# Load=158/1024=15%, Rehash=0, Collisions=18/189=10%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+
+# No files, no impossibilities in 0 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+SurfaceDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 69):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Surface.cpp -o $(OBJD)/Surface.o
+
+PhysicalDeviceDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 66):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/PhysicalDevice.cpp -o $(OBJD)/PhysicalDevice.o
+
+Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorPoolDebug AllocatorDebug
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 28):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -o $(BIND)/$(APP).exe \
+	$(OBJD)/main.o \
+	$(OBJD)/Instance.o \
+	$(OBJD)/Window.o \
+	$(OBJD)/PhysicalDevice.o \
+	$(OBJD)/Surface.o \
+	$(OBJD)/LogicalDevice.o \
+	$(OBJD)/Renderer.o \
+	$(OBJD)/Common.o \
+	$(OBJD)/CommandPool.o \
+	$(OBJD)/Renderpass.o \
+	$(OBJD)/SwapChain.o \
+	$(OBJD)/Pipeline.o \
+	$(OBJD)/Mesh.o \
+	$(OBJD)/DescriptorPool.o \
+	$(OBJD)/Allocator.o \
+	$(LDFLAGS)
+
+mainDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 54):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c main.cpp -o $(OBJD)/main.o
+
+commonDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 51):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Common.cpp -o $(OBJD)/Common.o
+
+Renderpassdebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 93):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Renderpass.cpp -o $(OBJD)/Renderpass.o
+
+DescriptorPoolDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 99):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorPool.cpp -o $(OBJD)/DescriptorPool.o
+
+# Not a target:
+/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2021-04-01 10:44:47.670973095
+#  File has been updated.
+#  Successfully updated.
+
+UtilDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 87):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Util.cpp -o $(OBJD)/Util.o
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+Release:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+RendererDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 75):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Renderer.cpp -o $(OBJD)/Renderer.o
+
+CommandPoolDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 78):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/CommandPool.cpp -o $(OBJD)/CommandPool.o
+
+WindowDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 63):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Window.cpp -o $(OBJD)/Window.o
+
+MeshDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 84):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Mesh.cpp -o $(OBJD)/Mesh.o
+
+cleanDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 105):
+	rm -f $(BIND)/*
+	rm -f $(OBJD)/*
+
+SceneDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 90):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Scene.cpp -o $(OBJD)/Scene.o
+
+AllocatorDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 102):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Allocator.cpp -o $(OBJD)/Allocator.o
+
+SwapChainDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 57):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/SwapChain.cpp -o $(OBJD)/SwapChain.o
+
+.PHONY: shaders
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+shaders:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 47):
+	$(GLSLC) $(SHADER_PATH)/shader.vert -o $(SHADER_PATH)/vert.spv
+	$(GLSLC) $(SHADER_PATH)/shader.frag -o $(SHADER_PATH)/frag.spv
+
+InstanceDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 60):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Instance.cpp -o $(OBJD)/Instance.o
+
+ModelDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 81):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Model.cpp -o $(OBJD)/Model.o
+
+PipelineDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 96):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Pipeline.cpp -o $(OBJD)/Pipeline.o
+
+LogicalDeviceDebug:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 72):
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/LogicalDevice.cpp -o $(OBJD)/LogicalDevice.o
+
+# files hash-table stats:
+# Load=27/1024=3%, Rehash=0, Collisions=1/70=1%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 29 / storage = 410 B / avg = 14 B
+# current buf: size = 8162 B / used = 410 B / count = 29 / avg = 14 B
+
+# strcache performance: lookups = 72 / hit rate = 59%
+# hash-table stats:
+# Load=29/8192=0%, Rehash=0, Collisions=0/72=0%
+# Finished Make data base on Thu Apr  1 10:56:34 2021
+
+ 

@@ -1,0 +1,10 @@
+[ 
+    { 
+        "model_path": "models/viking_room.obj", 
+        "texture_path": "models/viking_room.png" 
+    }, 
+    { 
+        "model_path": "models/Crystals_low.obj", 
+        "texture_path": "models/None_BaseColor.png" 
+    } 
+]
