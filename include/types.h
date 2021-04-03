@@ -22,13 +22,14 @@
 
 namespace KMDM
 {
- /******************************************************************************/
-
-    // The size of the window as reported by SDL.
+    /**
+     * @brief ExtentSize - width and height of the window.
+     * 
+     */
     struct ExtentSize
     {
-        int width;
-        int height;
+        uint32_t width;
+        uint32_t height;
     };
 
 /******************************************************************************/

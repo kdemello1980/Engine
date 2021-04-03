@@ -60,4 +60,41 @@ namespace KMDM
     {
         return m_descriptorPool;
     }
+
+
+    /**
+    * @brief Create a Per Frame Set object
+    * 
+    */
+    void DescriptorPool::createPerFrameSet()
+    {
+
+    }
+
+    /**
+    * @brief Create a Per Pass Set object
+    * 
+    */
+    void DescriptorPool::createPerPassSet()
+    {
+
+    }
+
+    /**
+    * @brief Create a Per Material Set object
+    * 
+    */
+    void Descriptorpool::createPerMaterialSet()
+    {
+
+    }
+
+    /**
+    * @brief Create a Per Object Set object
+    * 
+    */
+    void Descriptorpool::createPerObjectSet()
+    {
+        
+    }
 }

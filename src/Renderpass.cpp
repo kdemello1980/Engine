@@ -1,8 +1,8 @@
-#include "../include/Renderpass.h"
-#include "../include/SwapChain.h"
-#include "../include/LogicalDevice.h"
-#include "../include/PhysicalDevice.h"
-#include "../include/types.h"
+#include "Renderpass.h"
+#include "SwapChain.h"
+#include "LogicalDevice.h"
+#include "PhysicalDevice.h"
+#include "types.h"
 
 #include <vulkan/vulkan.h>
 #include <stdexcept>
