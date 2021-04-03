@@ -34,3 +34,5 @@
 # Shaders
 *.spv
 
+# Models
+models
