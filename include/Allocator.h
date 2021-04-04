@@ -76,6 +76,14 @@ namespace KMDM
              */
             void destoryAllocator();
 
+            /**
+             * @brief Pad the size of a uniform buffer so that it fits the minimum alignment of the GPU.
+             * 
+             * @param initial_size 
+             * @return size_t 
+             */
+            size_t padUniformBuffer(size_t initial_size);
+
         protected:
 
         private:

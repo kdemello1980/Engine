@@ -33,6 +33,7 @@ namespace KMDM
             static Scene* m_scene;
             std::vector<Mesh> m_meshes;
             // std::unordered_map<std::string, Mesh> m_meshes;
+            GPUSceneData m_sceneData;
     };
 }
 #endif // SCENE_H

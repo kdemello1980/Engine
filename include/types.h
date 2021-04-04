@@ -182,6 +182,19 @@ namespace KMDM
     };
 
 /******************************************************************************/
+
+    /**
+     * @brief struct representing a scene.
+     * 
+     */
+    struct GPUSceneData
+    {
+        glm::vec4 fogColor;
+        glm::vec4 fogDistance;
+        glm::vec4 ambientColor;
+        glm::vec4 sunlightDirection;
+        glm::vec4 sunlightColor;
+    };
 }
 
 // Define a hashing function for the Vertex struct.

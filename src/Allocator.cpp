@@ -127,5 +127,20 @@ namespace KMDM
         vmaDestroyAllocator(m_vmaAlocator);
         m_allocator = nullptr;
     }
+
+    size_t Allocator::padUniformBuffer(size_t initial_size)
+    {
+        size_t alignedSize = initial_size;
+        VkPhysicalDeviceProperties deviceProperties;
+        vkGetPhysicalDeviceProperties(PhysicalDevice::getInstance()->getPhysicalDevice(),
+            &deviceProperties);
+        
+        size_t minUboAlignment = deviceProperties.limits.minUniformBufferOffsetAlignment;
+        if (minUboAlignment > 0)
+        {
+            alignedSize = (alignedSize + minUboAlignment - 1) & ~(minUboAlignment - 1);
+        }
+        return alignedSize;
+    }
 }
 
