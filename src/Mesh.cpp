@@ -60,8 +60,8 @@ namespace KMDM
     {
         VkDeviceSize bufferSize = m_vertices.size() * sizeof(Vertex);
         // m_vertexBuffer = loadGpuBuffer(m_vertices.data(), bufferSize, 0, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
-        m_vertexBuffer = Allocator::getInstance()->getVMABuffer(bufferSize, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, 
-            VMA_MEMORY_USAGE_CPU_TO_GPU);
+        m_vertexBuffer = Allocator::getInstance()->getVMABuffer(bufferSize, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | 
+            VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VMA_MEMORY_USAGE_CPU_ONLY);
         
         // Load the data into the buffer.
         void *data;
@@ -79,8 +79,8 @@ namespace KMDM
     {
         VkDeviceSize bufferSize = m_indices.size() * sizeof(uint32_t);
         // m_indexBuffer = loadGpuBuffer(m_indices.data(), bufferSize, 0, VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
-        m_indexBuffer = Allocator::getInstance()->getVMABuffer(bufferSize, VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-            VMA_MEMORY_USAGE_CPU_TO_GPU);
+        m_indexBuffer = Allocator::getInstance()->getVMABuffer(bufferSize, VK_BUFFER_USAGE_INDEX_BUFFER_BIT |
+           VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VMA_MEMORY_USAGE_CPU_ONLY);
 
         // Load the data into the buffer.
         void *data;

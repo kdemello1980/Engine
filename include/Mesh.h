@@ -60,14 +60,10 @@ namespace KMDM
         private:
             // Vertex buffer.
             std::vector<Vertex> m_vertices;
-            // VkBuffer m_vertexBuffer;
-            // VkDeviceMemory m_vertexBufferMemory;
             AllocatedBuffer m_vertexBuffer;
 
             // Index buffer.
             std::vector<uint32_t> m_indices;
-            // VkBuffer m_indexBuffer;
-            // VkDeviceMemory m_indexBufferMemory;
             AllocatedBuffer m_indexBuffer;
 
             // Mesh name.

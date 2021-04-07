@@ -30,7 +30,8 @@ namespace KMDM
      */
     Pipeline::~Pipeline()
     {
-        vkDestroyPipeline();
+        vkDestroyPipelineLayout(m_logicalDevice->getLogicalDevice(), m_graphicsPipelineLayout, nullptr);
+        vkDestroyPipeline(m_logicalDevice->getLogicalDevice(), m_graphicsPipeline, nullptr);
     }
 
     /**
