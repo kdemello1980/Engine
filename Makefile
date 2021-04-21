@@ -1,6 +1,6 @@
 CFLAGS = -Wall -std=c++20 -O2
 CFLAGS_DEBUG = -std=c++20 -g
-LDFLAGS = -lSDL2 -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi
+LDFLAGS = -lSDL2 -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi 
 INCLUDE = -Iinclude -I/data/system-software/stb -I/data/system-software/tinyobjloader -I/data/system-software/json/include/ \
 	-I/data/system-software/SDL2/include/SDL2 -I/data/system-software/VulkanMemoryAllocator/src
 
@@ -18,7 +18,7 @@ BIND = bin/Debug
 DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug \
 	SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders \
 	CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug \
-	DescriptorPoolDebug AllocatorDebug
+	DescriptorPoolDebug AllocatorDebug UtilDebug SceneDebug
 
 Release:
 
@@ -41,6 +41,8 @@ Debug: $(DEBUG_TARGETS)
 	$(OBJD)/Mesh.o \
 	$(OBJD)/DescriptorPool.o \
 	$(OBJD)/Allocator.o \
+	$(OBJD)/Util.o \
+	$(OBJD)/Scene.o \
 	$(LDFLAGS)
 
 shaders:
@@ -100,6 +102,7 @@ DescriptorPoolDebug:
 
 AllocatorDebug:
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Allocator.cpp -o $(OBJD)/Allocator.o
+
 
 cleanDebug:
 	rm -f $(BIND)/*

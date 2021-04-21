@@ -5,6 +5,8 @@
 #include "SwapChain.h"
 #include "Pipeline.h"
 #include "Renderpass.h"
+#include "DescriptorPool.h"
+
 
 #include <vulkan/vulkan.h>
 #include <stdexcept>
@@ -21,6 +23,7 @@ namespace KMDM
     {
         m_renderPass = render_pass;
         m_logicalDevice = LogicalDevice::getInstance();
+        m_descriptorPool = new DescriptorPool();
         createGraphicsPipeline();
     } 
 
@@ -111,7 +114,7 @@ namespace KMDM
         VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
         vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
         vertexInputInfo.vertexBindingDescriptionCount = 1;
-        vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;;
+        vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;
         vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
         vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
 
@@ -202,10 +205,17 @@ namespace KMDM
         dynamicState.pDynamicStates = dynamicStates;
 
         // Pipeline layout.
+        VkDescriptorSetLayout layouts[] = {
+            m_descriptorPool->getPerFrameLayout(),
+            m_descriptorPool->getPerPassLayout(),
+            m_descriptorPool->getPerMaterialLayout(),
+            m_descriptorPool->getPerObjectLayout()
+        };
+
         VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        pipelineLayoutInfo.setLayoutCount = 1;
-        pipelineLayoutInfo.pSetLayouts = &descriptorSetLayout;
+        pipelineLayoutInfo.setLayoutCount = 4;
+        pipelineLayoutInfo.pSetLayouts = layouts;
         pipelineLayoutInfo.pushConstantRangeCount = 0;
         pipelineLayoutInfo.pPushConstantRanges = nullptr;
 
@@ -258,4 +268,9 @@ namespace KMDM
         vkDestroyShaderModule(m_logicalDevice->getLogicalDevice(), fragShaderModule, nullptr);
         vkDestroyShaderModule(m_logicalDevice->getLogicalDevice(), vertShaderModule, nullptr);
     } /// createGraphicsPipeline
+
+    DescriptorPool Pipeline::getDescriptorPool()
+    {
+        return *m_descriptorPool;
+    }
 }

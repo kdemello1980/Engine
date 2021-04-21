@@ -25,19 +25,19 @@ namespace KMDM
 
         // Camera buffer.
         poolSizes[DESCRIPTOR_POOL_ENGINE_RESOURCES].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-        poolSizes[DESCRIPTOR_POOL_ENGINE_RESOURCES].descriptorCount = 1;
+        poolSizes[DESCRIPTOR_POOL_ENGINE_RESOURCES].descriptorCount = MAX_FRAMES_IN_FLIGHT;
 
         // Per renderpass resources.
         poolSizes[DESCRIPTOR_POOL_PER_PASS_RESOURCES].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-        poolSizes[DESCRIPTOR_POOL_PER_PASS_RESOURCES].descriptorCount = 1;
+        poolSizes[DESCRIPTOR_POOL_PER_PASS_RESOURCES].descriptorCount = MAX_FRAMES_IN_FLIGHT;
 
         // Materials.
         poolSizes[DESCRIPTOR_POOL_MATERIAL_RESOURCES].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-        poolSizes[DESCRIPTOR_POOL_MATERIAL_RESOURCES].descriptorCount = 1;
+        poolSizes[DESCRIPTOR_POOL_MATERIAL_RESOURCES].descriptorCount = MAX_FRAMES_IN_FLIGHT;
 
         // Per-object resources.
         poolSizes[DESCRIPTOR_POOL_OBJECT_RESORUCES].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC;
-        poolSizes[DESCRIPTOR_POOL_OBJECT_RESORUCES].descriptorCount = 1;
+        poolSizes[DESCRIPTOR_POOL_OBJECT_RESORUCES].descriptorCount = MAX_FRAMES_IN_FLIGHT;
 
         // poolSizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         // poolSizes[0].descriptorCount = static_cast<uint32_t>(SwapChain::getInstance()->getSwapChainImages().size());
@@ -103,6 +103,23 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create per frame descriptor set layout.");
         }
+
+        m_perFrameSet.resize(MAX_FRAMES_IN_FLIGHT);
+        
+        VkDescriptorSetAllocateInfo allocInfo = {};
+        allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+        allocInfo.descriptorPool = m_descriptorPool;
+        allocInfo.descriptorSetCount = static_cast<uint32_t>(SwapChain::getInstance()->getSwapChainImages().size());
+
+        if (vkAllocateDescriptorSets(LogicalDevice::getInstance()->getLogicalDevice(), &allocInfo, m_perFrameSet.data())
+            != VK_SUCCESS)
+        {
+            throw std::runtime_error("Failed to allocate per frame descriptor sets.");
+        }
+    }
+    std::vector<VkDescriptorSet> DescriptorPool::getPerFrameSet()
+    {
+        return m_perFrameSet;
     }
 
     /**
@@ -127,6 +144,23 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create per frame descriptor set layout.");
         }
+
+        m_perPassSet.resize(MAX_FRAMES_IN_FLIGHT);
+        
+        VkDescriptorSetAllocateInfo allocInfo = {};
+        allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+        allocInfo.descriptorPool = m_descriptorPool;
+        allocInfo.descriptorSetCount = static_cast<uint32_t>(SwapChain::getInstance()->getSwapChainImages().size());
+
+        if (vkAllocateDescriptorSets(LogicalDevice::getInstance()->getLogicalDevice(), &allocInfo, m_perPassSet.data())
+            != VK_SUCCESS)
+        {
+            throw std::runtime_error("Failed to allocate per pass descriptor sets.");
+        }
+    }
+    std::vector<VkDescriptorSet> DescriptorPool::getPerPassSet()
+    {
+        return m_perPassSet;
     }
 
     /**
@@ -151,6 +185,23 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create per frame descriptor set layout.");
         }
+
+        m_materialSet.resize(MAX_FRAMES_IN_FLIGHT);
+        
+        VkDescriptorSetAllocateInfo allocInfo = {};
+        allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+        allocInfo.descriptorPool = m_descriptorPool;
+        allocInfo.descriptorSetCount = static_cast<uint32_t>(SwapChain::getInstance()->getSwapChainImages().size());
+
+        if (vkAllocateDescriptorSets(LogicalDevice::getInstance()->getLogicalDevice(), &allocInfo, m_materialSet.data())
+            != VK_SUCCESS)
+        {
+            throw std::runtime_error("Failed to allocate per pass descriptor sets.");
+        }
+    }
+    std::vector<VkDescriptorSet> DescriptorPool::getPerMaterialSet()
+    {
+        return m_materialSet;
     }
 
     /**
@@ -175,5 +226,44 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create per frame descriptor set layout.");
         }       
+
+        m_objectSet.resize(MAX_FRAMES_IN_FLIGHT);
+        
+        VkDescriptorSetAllocateInfo allocInfo = {};
+        allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+        allocInfo.descriptorPool = m_descriptorPool;
+        allocInfo.descriptorSetCount = static_cast<uint32_t>(SwapChain::getInstance()->getSwapChainImages().size());
+
+        if (vkAllocateDescriptorSets(LogicalDevice::getInstance()->getLogicalDevice(), &allocInfo, m_objectSet.data())
+            != VK_SUCCESS)
+        {
+            throw std::runtime_error("Failed to allocate per pass descriptor sets.");
+        }
+    }
+
+
+    std::vector<VkDescriptorSet> DescriptorPool::getPerObjectSet()
+    {
+        return m_objectSet;
+    }
+
+    VkDescriptorSetLayout DescriptorPool::getPerFrameLayout()
+    {
+        return m_perFrameLayout;
+    }
+
+    VkDescriptorSetLayout DescriptorPool::getPerPassLayout()
+    {
+        return m_perPassLayout;
+    }
+
+    VkDescriptorSetLayout DescriptorPool::getPerMaterialLayout()
+    {
+        return m_materialLayout;
+    }
+    
+    VkDescriptorSetLayout DescriptorPool::getPerObjectLayout()
+    {
+        return m_objectLayout;
     }
 }

@@ -2,8 +2,10 @@
 #define DESCRIPTORPOOL_H
 
 #include "Common.h"
+#include "DescriptorPool.h"
 
 #include <vulkan/vulkan.h>
+#include <vector>
 
 namespace KMDM
 {
@@ -14,7 +16,17 @@ namespace KMDM
             virtual ~DescriptorPool();
 
             VkDescriptorPool getPool();
-        
+                    
+            std::vector<VkDescriptorSet> getPerFrameSet();
+            std::vector<VkDescriptorSet> getPerPassSet();
+            std::vector<VkDescriptorSet> getPerMaterialSet();
+            std::vector<VkDescriptorSet> getPerObjectSet();
+
+            VkDescriptorSetLayout getPerFrameLayout();
+            VkDescriptorSetLayout getPerPassLayout();
+            VkDescriptorSetLayout getPerMaterialLayout();
+            VkDescriptorSetLayout getPerObjectLayout();
+
         protected:
             /**
              * @brief Create a Per Frame Set object
@@ -27,6 +39,7 @@ namespace KMDM
              * 
              */
             void createPerPassSet();
+            
 
             /**
              * @brief Create a Per Material Set object
@@ -45,19 +58,19 @@ namespace KMDM
 
             // Per frame Descriptor sets.
             VkDescriptorSetLayout m_perFrameLayout;
-            VkDescriptorSet m_perFrameSet;
+            std::vector<VkDescriptorSet> m_perFrameSet;
 
             // Per pass sets.
             VkDescriptorSetLayout m_perPassLayout;
-            VkDescriptorSet m_perPassSet;
+            std::vector<VkDescriptorSet> m_perPassSet;
 
             // Material resources.
             VkDescriptorSetLayout m_materialLayout;
-            VkDescriptorSet m_materialSet;
+            std::vector<VkDescriptorSet> m_materialSet;
 
             // Per object resources.
             VkDescriptorSetLayout m_objectLayout;
-            VkDescriptorSet m_objectSet;
+            std::vector<VkDescriptorSet> m_objectSet;
     };
 }
 

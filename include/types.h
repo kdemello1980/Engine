@@ -28,8 +28,8 @@ namespace KMDM
      */
     struct ExtentSize
     {
-        uint32_t width;
-        uint32_t height;
+        int width;
+        int height;
     };
 
 /******************************************************************************/
@@ -50,7 +50,45 @@ namespace KMDM
                 && texCoord == other.texCoord;
         }
 
-        
+        static VkVertexInputBindingDescription getBindingDescription()
+        {
+            VkVertexInputBindingDescription bindingDescription = {};
+            bindingDescription.binding = static_cast<uint32_t>(DESCRIPTOR_POOL_OBJECT_RESORUCES);
+            bindingDescription.stride = sizeof(Vertex);
+            bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+            return bindingDescription;
+        }
+
+        static std::array<VkVertexInputAttributeDescription, 4> getAttributeDescriptions()
+        {
+            std::array<VkVertexInputAttributeDescription, 4> descriptions = {};
+            
+            // Position vector. Per vertex is binding 3.
+            descriptions[0].binding = static_cast<uint32_t>(DESCRIPTOR_POOL_OBJECT_RESORUCES);
+            descriptions[0].location = 0;
+            descriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
+            descriptions[0].offset = offsetof(Vertex, position);
+
+            // Normal.
+            descriptions[1].binding = static_cast<uint32_t>(DESCRIPTOR_POOL_OBJECT_RESORUCES);
+            descriptions[1].location = 1;
+            descriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
+            descriptions[1].offset = offsetof(Vertex, normal);
+
+            // Color.
+            descriptions[2].binding = static_cast<uint32_t>(DESCRIPTOR_POOL_OBJECT_RESORUCES);
+            descriptions[2].location = 2;
+            descriptions[2].format = VK_FORMAT_R32G32B32_SFLOAT;
+            descriptions[2].offset = offsetof(Vertex, color);
+
+            // Texture coordinate.
+            descriptions[3].binding = static_cast<uint32_t>(DESCRIPTOR_POOL_OBJECT_RESORUCES);
+            descriptions[3].location = 3;
+            descriptions[3].format = VK_FORMAT_R32G32B32_SFLOAT;
+            descriptions[3].offset = offsetof(Vertex, texCoord);
+
+            return descriptions;
+        }
     };
 
 /******************************************************************************/

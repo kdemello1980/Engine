@@ -149,7 +149,9 @@ namespace KMDM
             vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentation);
             if (presentation)
             {
+                std::cout << i << std::endl;
                 m_queueFamilyInfo.presentationFamilyIndex = i;
+                break;
             }
         }
         // Check the info struct again to make sure we actually found a suitable

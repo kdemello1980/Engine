@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <vector>
+#include <array>
 
 #include "Window.h"
 #include "Surface.h"
@@ -14,6 +15,7 @@
 #include "types.h"
 #include "Pipeline.h"
 #include "Allocator.h"
+#include "DescriptorPool.h"
 
 namespace KMDM
 {

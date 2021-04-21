@@ -10,6 +10,7 @@
 #include "Pipeline.h"
 #include "Util.h"
 #include "Allocator.h"
+#include "DescriptorPool.h"
 
 #include <vulkan/vulkan.h>
 #include <stdexcept>
@@ -56,6 +57,12 @@ namespace KMDM
         // Create depth buffer.
         createDepthResources();
     }
+
+    void Renderer::recreateSwapChain()
+    {
+
+    }
+
 
     /**
      * @brief Destroy the Renderer object.
@@ -320,6 +327,9 @@ namespace KMDM
             throw std::runtime_error("Failed to allocate command buffers.");
         }
 
+        // Do something with a descriptor set.
+        
+
         // Begin recording command buffers.
         for (size_t i = 0; i < m_drawCommandBuffers.size(); i++)
         {
@@ -353,6 +363,8 @@ namespace KMDM
             // Bind the graphics pipeline.
             vkCmdBindPipeline(m_drawCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, *m_graphicsPipeline->getPipeline());
 
+// This should be where we deal with dynamic storage buffers for streaming our geometry into a single draw call
+// rather than calling an individual draw call for each individual mesh.
 
             for (auto & mesh : Scene::getInstance()->getMeshes())
             {
@@ -360,12 +372,14 @@ namespace KMDM
                 // vertexBuffers.push_back(mesh.getVertexBuffer());
                 // indexBuffers.
                 VkDeviceSize offsets[] = {0};
-                vkCmdBindVertexBuffers(m_drawCommandBuffers[i], 0, 1, &mesh.getVertexBuffer().buffer, offsets);
+                VkBuffer buffers[] =  { mesh.getVertexBuffer().buffer };
+                vkCmdBindVertexBuffers(m_drawCommandBuffers[i], 0, 1, buffers, offsets);
                 vkCmdBindIndexBuffer(m_drawCommandBuffers[i], mesh.getIndexBuffer().buffer, 0, VK_INDEX_TYPE_UINT32);
                 
                 // Bind the UBO descriptor sets.
                 vkCmdBindDescriptorSets(m_drawCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, 
-                    *m_graphicsPipeline->getPipelineLayout(), 0, 1, &descriptorSets[i], 0, nullptr);
+                    *m_graphicsPipeline->getPipelineLayout(), 0, 1, 
+                        &m_graphicsPipeline->getDescriptorPool().getPerObjectSet()[i], 0, nullptr);
 
                 // Draw.
                 // vkCmdDraw(m_drawCommandBuffers[i], 3, 1, 0, 0);
