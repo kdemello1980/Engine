@@ -82,6 +82,7 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create render pass.");
         }
+        std::cout << "Created render pass." << std::endl;
     }
 
     /**

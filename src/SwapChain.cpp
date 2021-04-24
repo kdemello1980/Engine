@@ -1,6 +1,7 @@
 #include "../include/SwapChain.h"
 #include <vulkan/vulkan.h>
 #include <stdexcept>
+#include <iostream>
 
 #include "../include/LogicalDevice.h"
 #include "../include/PhysicalDevice.h"
@@ -86,6 +87,7 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create swapchain.");
         }
+        std::cout <<  "Created swapchain." << std::endl;
 
         // Get the swapchain images.
         uint32_t num_images = 0;
@@ -96,6 +98,7 @@ namespace KMDM
         }
         m_swapChainImages.resize(num_images);
         vkGetSwapchainImagesKHR(m_logicalDevice->getLogicalDevice(), m_VKswapChain, &num_images, m_swapChainImages.data());
+        std::cout << "Created " << num_images << " swapchain images." << std::endl;
     }
 /******************************************************************************/
     /**

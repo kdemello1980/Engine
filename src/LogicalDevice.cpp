@@ -149,7 +149,7 @@ namespace KMDM
             vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentation);
             if (presentation)
             {
-                std::cout << i << std::endl;
+                // std::cout << i << std::endl;
                 m_queueFamilyInfo.presentationFamilyIndex = i;
                 break;
             }
@@ -168,7 +168,7 @@ namespace KMDM
     *******************************************************************/
     void LogicalDevice::getQueueHandle()
     {
-        QueueFamilyInfo q = m_queueFamilyInfo;
+        // QueueFamilyInfo q = m_queueFamilyInfo;
         vkGetDeviceQueue(m_VKDevice, m_queueFamilyInfo.graphicsFamilyIndex.value(),
             m_queueFamilyInfo.graphicsFamilyIndex.value(), &m_graphicsQueue);
         vkGetDeviceQueue(m_VKDevice, m_queueFamilyInfo.presentationFamilyIndex.value(),

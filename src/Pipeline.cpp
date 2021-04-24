@@ -237,6 +237,7 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create pipeline layout.");
         }
+        std::cout << "Created pipeline layout." << std::endl;
 
         // Throw it all together.
         VkGraphicsPipelineCreateInfo pipeLineInfo = {};
@@ -263,6 +264,7 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create graphics pipeline.");
         }
+        std::cout << "Created graphics pipeline." << std::endl;
 
         ////////////////////////////////////////
         vkDestroyShaderModule(m_logicalDevice->getLogicalDevice(), fragShaderModule, nullptr);

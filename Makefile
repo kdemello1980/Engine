@@ -45,6 +45,27 @@ Debug: $(DEBUG_TARGETS)
 	$(OBJD)/Scene.o \
 	$(LDFLAGS)
 
+LinkDebug:
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -o $(BIND)/$(APP).exe \
+	$(OBJD)/main.o \
+	$(OBJD)/Instance.o \
+	$(OBJD)/Window.o \
+	$(OBJD)/PhysicalDevice.o \
+	$(OBJD)/Surface.o \
+	$(OBJD)/LogicalDevice.o \
+	$(OBJD)/Renderer.o \
+	$(OBJD)/Common.o \
+	$(OBJD)/CommandPool.o \
+	$(OBJD)/Renderpass.o \
+	$(OBJD)/SwapChain.o \
+	$(OBJD)/Pipeline.o \
+	$(OBJD)/Mesh.o \
+	$(OBJD)/DescriptorPool.o \
+	$(OBJD)/Allocator.o \
+	$(OBJD)/Util.o \
+	$(OBJD)/Scene.o \
+	$(LDFLAGS)
+
 shaders:
 	$(GLSLC) $(SHADER_PATH)/shader.vert -o $(SHADER_PATH)/vert.spv
 	$(GLSLC) $(SHADER_PATH)/shader.frag -o $(SHADER_PATH)/frag.spv
