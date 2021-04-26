@@ -34,6 +34,7 @@ namespace KMDM
             void createCommandBuffers();
             void recreateSwapChain();
             void createDepthResources();
+            void createCameraBuffers();
 
         private:
             Renderer();
@@ -76,6 +77,10 @@ namespace KMDM
             // VkImage m_depthImage;
             VkImageView m_depthImageView;
             AllocatedImage m_depthImage;
+
+            // Camera buffer.
+            // CameraData m_cameraData;
+            std::vector<AllocatedBuffer> m_cameraBuffers;
     };
 }
 #endif // RENDERER_H

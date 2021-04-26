@@ -10,28 +10,18 @@
 // } ubo;
 
 // Camera data
-layout(set = 0, binding = 0) uniform CameraBuffer {
-    mat4 view;
-    mat4 proj;
-    mat4 viewproj;
-} cameraData;
+// layout(set = 0, binding = 0) uniform CameraBuffer {
+//     mat4 view;
+//     mat4 proj;
+//     mat4 viewproj;
+// } cameraData;
 
 // Per pass binding.
 //layout(set = 1, binding = 0);
 
-// Material binding.
-layout(set = 2, binding = 0) uniform Texture {
-    vec3 inColor;
-    vec2 inTexCoord;
-} texture;
-
-// Object binding.
-layout(set = 3, binding = 0) uniform UniformBufferObject {
-    mat4 model;
-    mat4 view;
-    mat4 proj;
-    vec3 inPosition;
-} ubo;
+layout(set = 0, binding = 0) uniform posVector {
+    
+} posVector;
 
 // Input locations.
 // layout(location = 0) in vec3 inPosition;

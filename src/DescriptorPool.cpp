@@ -96,8 +96,8 @@ namespace KMDM
     void DescriptorPool::createPerFrameSet()
     {
         VkDescriptorSetLayoutBinding binding = {};
-        //binding.binding = DESCRIPTOR_POOL_ENGINE_RESOURCES;
-        binding.binding = 0;
+        binding.binding = DESCRIPTOR_POOL_ENGINE_RESOURCES;
+        // binding.binding = 0;
         binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         binding.descriptorCount = 1;
         binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
@@ -148,8 +148,8 @@ namespace KMDM
     void DescriptorPool::createPerPassSet()
     {
         VkDescriptorSetLayoutBinding binding = {};
-        //binding.binding = DESCRIPTOR_POOL_PER_PASS_RESOURCES;
-        binding.binding = 0;
+        binding.binding = DESCRIPTOR_POOL_PER_PASS_RESOURCES;
+        // binding.binding = 0;
         binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         binding.descriptorCount = 1;
         binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
@@ -199,7 +199,8 @@ namespace KMDM
     void DescriptorPool::createPerMaterialSet()
     {
         VkDescriptorSetLayoutBinding binding = {};
-        binding.binding = 0;
+        binding.binding = DESCRIPTOR_POOL_MATERIAL_RESOURCES;
+        // binding.binding = 0;
         binding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
         binding.descriptorCount = 1;
         binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
@@ -249,7 +250,8 @@ namespace KMDM
     void DescriptorPool::createPerObjectSet()
     {
         VkDescriptorSetLayoutBinding binding = {};
-        binding.binding = 0;
+        // binding.binding = 0;
+        binding.binding = DESCRIPTOR_POOL_OBJECT_RESORUCES;
         binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         binding.descriptorCount = 1;
         binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;

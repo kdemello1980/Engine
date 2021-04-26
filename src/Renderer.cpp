@@ -56,6 +56,9 @@ namespace KMDM
 
         // Create depth buffer.
         createDepthResources();
+
+        // Create the camera buffer.
+        createCameraBuffers();
     }
 
     void Renderer::recreateSwapChain()
@@ -86,6 +89,12 @@ namespace KMDM
      */
     Renderer::~Renderer()
     {
+        // Destory the camera buffers.
+        for (size_t i = 0; i < m_cameraBuffers.size(); i++)
+        {
+            vmaDestroyBuffer(m_allocator->getAllocator(), m_cameraBuffers[i].buffer, m_cameraBuffers[i].allocation);
+        }
+
         destroyRenderer();
     }
 
@@ -165,6 +174,22 @@ namespace KMDM
         imageInfo.mipLevels = 1;
 
         m_depthImageView = createImageView(m_depthImage.image, depthFormat, VK_IMAGE_ASPECT_DEPTH_BIT, 1);
+    }
+
+    /**
+     * @brief Create the camera buffers.
+     * 
+     */
+    void Renderer::createCameraBuffers()
+    {
+        size_t size = SwapChain::getInstance()->getSwapChainImages().size();
+        m_cameraBuffers.resize(size);
+
+        for (size_t i = 0; i < size; i++)
+        {
+            m_cameraBuffers[i] = m_allocator->getVMABuffer(sizeof(CameraData), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, 
+                VMA_MEMORY_USAGE_CPU_TO_GPU);
+        }
     }
 
 
