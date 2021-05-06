@@ -18,7 +18,7 @@ BIND = bin/Debug
 DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug \
 	SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders \
 	CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug \
-	DescriptorPoolDebug AllocatorDebug UtilDebug SceneDebug
+	DescriptorPoolDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
 
 Release:
 
@@ -61,6 +61,7 @@ LinkDebug:
 	$(OBJD)/Pipeline.o \
 	$(OBJD)/Mesh.o \
 	$(OBJD)/DescriptorPool.o \
+	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
 	$(OBJD)/Scene.o \
@@ -120,6 +121,9 @@ PipelineDebug:
 
 DescriptorPoolDebug:
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorPool.cpp -o $(OBJD)/DescriptorPool.o
+
+DescriptorSetDebug:
+	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorSet.cpp -o $(OBJD)/DescriptorSet.o
 
 AllocatorDebug:
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Allocator.cpp -o $(OBJD)/Allocator.o

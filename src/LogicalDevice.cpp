@@ -104,6 +104,8 @@ namespace KMDM
         }
         std::cout << "Created logical device." << std::endl;
 
+        vkGetPhysicalDeviceProperties(phys_dev, &m_physicalDeviceProperties);
+
         getQueueHandle();
         std::cout << "-> Got queue handles." << std::endl;
     }
@@ -189,5 +191,10 @@ namespace KMDM
             throw std::runtime_error("Failed to create shader module.");
         }
         return shaderModule;
+    }
+
+    VkPhysicalDeviceProperties LogicalDevice::getPhysicalDeviceProperties()
+    {
+        return m_physicalDeviceProperties;
     }
 }

@@ -19,6 +19,7 @@ namespace KMDM
             void destroyLogicalDevice();
 
             VkShaderModule createShaderModule(const std::vector<char>& code);
+            VkPhysicalDeviceProperties getPhysicalDeviceProperties();
 
         protected:
             void getQueueHandle();
@@ -33,6 +34,7 @@ namespace KMDM
             VkQueue m_graphicsQueue;
             VkQueue m_presentationQueue;
             QueueFamilyInfo m_queueFamilyInfo;
+            VkPhysicalDeviceProperties m_physicalDeviceProperties;
     };
 }
 #endif // LOGICALDEVICE_H

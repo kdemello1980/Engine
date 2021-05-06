@@ -3,6 +3,8 @@
 
 #include "Common.h"
 #include "DescriptorPool.h"
+#include "Renderpass.h"
+#include "LogicalDevice.h"
 
 #include <vulkan/vulkan.h>
 #include <vector>
@@ -12,67 +14,35 @@ namespace KMDM
     class DescriptorPool
     {
         public:
-            DescriptorPool();
+            DescriptorPool(Renderpass renderPass);
             virtual ~DescriptorPool();
 
-            VkDescriptorPool getPool();
-                    
-            std::vector<VkDescriptorSet> getPerFrameSet();
-            std::vector<VkDescriptorSet> getPerPassSet();
-            std::vector<VkDescriptorSet> getPerMaterialSet();
-            std::vector<VkDescriptorSet> getPerObjectSet();
-
-            VkDescriptorSetLayout getPerFrameLayout();
-            VkDescriptorSetLayout getPerPassLayout();
-            VkDescriptorSetLayout getPerMaterialLayout();
-            VkDescriptorSetLayout getPerObjectLayout();
+            VkDescriptorPool getWorldPool();
+            VkDescriptorPool getPassPool();
+            VkDescriptorPool getMaterialPool();
+            VkDescriptorPool getMeshPool();
 
         protected:
-            /**
-             * @brief Create a Per Frame Set object
-             * 
-             */
-            void createPerFrameSet();
-
-            /**
-             * @brief Create a Per Pass Set object
-             * 
-             */
-            void createPerPassSet();
-            
-
-            /**
-             * @brief Create a Per Material Set object
-             * 
-             */
-            void createPerMaterialSet();
-
-            /**
-             * @brief Create a Per Object Set object
-             * 
-             */
-            void createPerObjectSet();
+            void createWorldPool();
+            void createPassPool();
+            void createMaterialPool();
+            void createMeshPool();
+            void createPool(VkDescriptorPool pool, uint32_t binding, VkDescriptorType type, Renderpass renderPass);
 
         private:
-            VkDescriptorPool m_descriptorPool;
+            // Descriptor pools.
+            VkDescriptorPool m_worldPool;
+            VkDescriptorPool m_passPool;
+            VkDescriptorPool m_materialPool;
+            VkDescriptorPool m_meshPool;
 
-            // Per frame Descriptor sets.
-            VkDescriptorSetLayout m_perFrameLayout;
-            std::vector<VkDescriptorSet> m_perFrameSet;
+            // Renderpass.
+            Renderpass m_renderPass;
 
-            // Per pass sets.
-            VkDescriptorSetLayout m_perPassLayout;
-            std::vector<VkDescriptorSet> m_perPassSet;
+            // Logical device.
+            LogicalDevice* m_logicalDevice;
 
-            // Material resources.
-            VkDescriptorSetLayout m_materialLayout;
-            std::vector<VkDescriptorSet> m_materialSet;
 
-            // Per object resources.
-            VkDescriptorSetLayout m_objectLayout;
-            std::vector<VkDescriptorSet> m_objectSet;
     };
 }
-
-
 #endif

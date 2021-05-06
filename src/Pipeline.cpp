@@ -212,12 +212,18 @@ namespace KMDM
             m_descriptorPool->getPerObjectLayout()
         };
 
+        // Push constants.
+        VkPushConstantRange pushConstant = {};
+        pushConstant.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+        pushConstant.offset = 0;
+        pushConstant.size = sizeof(CameraData);
+
         VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipelineLayoutInfo.setLayoutCount = 4;
         pipelineLayoutInfo.pSetLayouts = layouts;
-        pipelineLayoutInfo.pushConstantRangeCount = 0;
-        pipelineLayoutInfo.pPushConstantRanges = nullptr;
+        pipelineLayoutInfo.pushConstantRangeCount = 1;
+        pipelineLayoutInfo.pPushConstantRanges = &pushConstant;
 
         // Depth stencil.
         VkPipelineDepthStencilStateCreateInfo depthStencil = {};
