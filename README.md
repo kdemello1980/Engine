@@ -6,10 +6,7 @@ really any good for much else.
 
 I'll post some more detail, as well as comments, when I get something that is factored correctly and actually works.
 
-The foundation is from https://vulkan-tutorial.com/
-
-Some ideas about how to expand from one mesh to an entire scene are coming from https://vkguide.dev/, but the approach taken there is completely different from 
-how I'm organizing things here.
+The foundation is from https://vulkan-tutorial.com/ (not so much anymore).
 
 I'll admit this is very hard for the uninitiated, so you probably won't garner much insight into how vulkan works by examining this code.  If you do, more power to 
 you.  Otherwise, I probably won't be able to help if you have issues with the code.  I may be designing things in a very sub-optimal way, but I'm leaning as I go
