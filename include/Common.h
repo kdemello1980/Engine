@@ -36,12 +36,14 @@ const std::vector<const char *> REQUIRED_DEVICE_EXTENSIONS =
     Globals and #defines
 *******************************************************************/
 const size_t MAX_FRAMES_IN_FLIGHT = 2;
-const size_t MAX_DESCRIPTOR_SETS = 12;
-const size_t DESCRIPTOR_CATEGORIES = 4;
-const size_t DESCRIPTOR_POOL_ENGINE_RESOURCES = 0;
-const size_t DESCRIPTOR_POOL_PER_PASS_RESOURCES = 1;
-const size_t DESCRIPTOR_POOL_MATERIAL_RESOURCES = 2;
-const size_t DESCRIPTOR_POOL_OBJECT_RESORUCES = 3;
+// const size_t MAX_DESCRIPTOR_SETS = 12;
+// const size_t DESCRIPTOR_CATEGORIES = 4;
+// const size_t DESCRIPTOR_POOL_ENGINE_RESOURCES = 0;
+// const size_t DESCRIPTOR_POOL_PER_PASS_RESOURCES = 1;
+// const size_t DESCRIPTOR_POOL_MATERIAL_RESOURCES = 2;
+// const size_t DESCRIPTOR_POOL_OBJECT_RESORUCES = 3;
+
+const uint32_t MAX_DESCRIPTORS = 524288;
 
 #define SHADER_PATH "shaders/"
 #define WIDTH 1600

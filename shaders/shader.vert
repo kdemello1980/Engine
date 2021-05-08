@@ -1,53 +1,32 @@
 #version 450
 #extension GL_ARB_separate_shader_objects : enable
 
-// // Use an binding though a uniform buffer object
-// layout(binding = 0) uniform UniformBufferObject
-// {
-//     mat4 model;
-//     mat4 view;
-//     mat4 proj;
-// } ubo;
+// Scene data
+layout(set = 0, binding = 0) uniform GPUSceneData {
+    vec4 fogColor;
+    vec4 fogDistance;
+    vec4 ambientColor;
+    vec4 sunlightDirection;
+    vec4 sunlightColor;
+} sceneData;
 
-// Camera data
-// layout(set = 0, binding = 0) uniform CameraBuffer {
-//     mat4 view;
-//     mat4 proj;
-//     mat4 viewproj;
-// } cameraData;
-
-// Per pass binding.
-//layout(set = 1, binding = 0);
-
-layout(set = 0, binding = 0) uniform Vertex {
+// Vertex.
+layout(set = 0, binding = 1) uniform Vertex {
     vec4 position;
     vec3 normal;
     vec3 color;
     vec2 texCoord;
 } vertex;
 
-layout(push_constant) uniform CameraBuffer {
+// Camera.
+layout (push_constant) uniform CameraData {
     mat4 view;
-    mat4 proj;
+    mat4 projection;
     mat4 viewproj;
-} cameraData;
+} camera;
 
-layout(set = 1, binding = 0) uniform UBO {
-    mat4 model;
-    mat4 view;
-    mat4 proj;
-} ubo;
-
-layout(set = 2, binding = 0) uniform World {
-    vec4 fogColor;
-    vec4 fogDistance;
-    vec4 ambientColor;
-    vec4 sunlightDirection;
-    vec4 sunlightColor;
-} world;
-
-// Input locations.
-// layout(location = 0) in vec3 inPosition;
+// Texture/Sampler.
+// layout(set = 0, binding = 2) uniform sampler2D texture;
 
 // Output locationsl
 layout(location = 0) out vec3 fragColor;
