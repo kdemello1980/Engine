@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu May  6 17:51:57 2021
+# Make data base, printed on Wed May 12 16:04:21 2021
 
 # Variables
 
@@ -332,7 +332,7 @@ QT4_IM_MODULE = xim
 # environment
 KDE_FULL_SESSION = true
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 18)
-DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorPoolDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
+DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
 # environment
 JRE_HOME = /usr/lib64/jvm/java
 # variable set hash-table stats:
@@ -357,24 +357,24 @@ SurfaceDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 93):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 91):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Surface.cpp -o $(OBJD)/Surface.o
 
 PhysicalDeviceDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 90):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 88):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/PhysicalDevice.cpp -o $(OBJD)/PhysicalDevice.o
 
 DescriptorSetDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 126):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 121):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorSet.cpp -o $(OBJD)/DescriptorSet.o
 
-Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorPoolDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
+Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -393,7 +393,6 @@ Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug Logi
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
 	$(OBJD)/Mesh.o \
-	$(OBJD)/DescriptorPool.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
 	$(OBJD)/Scene.o \
@@ -402,36 +401,29 @@ Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug Logi
 mainDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 78):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 76):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c main.cpp -o $(OBJD)/main.o
 
 commonDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 75):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 73):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Common.cpp -o $(OBJD)/Common.o
 
 Renderpassdebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 117):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 115):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Renderpass.cpp -o $(OBJD)/Renderpass.o
-
-DescriptorPoolDebug:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 123):
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorPool.cpp -o $(OBJD)/DescriptorPool.o
 
 # Not a target:
 /data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-06 17:51:14.481380112
+ 
+#  Last modified 2021-05-12 16:04:07.490610402
 #  File has been updated.
 #  Successfully updated.
 
@@ -439,7 +431,7 @@ UtilDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 111):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 109):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Util.cpp -o $(OBJD)/Util.o
 
 # Not a target:
@@ -464,35 +456,35 @@ RendererDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 99):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 97):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Renderer.cpp -o $(OBJD)/Renderer.o
 
 CommandPoolDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 102):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 100):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/CommandPool.cpp -o $(OBJD)/CommandPool.o
 
 WindowDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 87):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 85):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Window.cpp -o $(OBJD)/Window.o
 
 MeshDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 108):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 106):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Mesh.cpp -o $(OBJD)/Mesh.o
 
 cleanDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 133):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 128):
 	rm -f $(BIND)/*
 	rm -f $(OBJD)/*
 
@@ -500,28 +492,28 @@ SceneDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 114):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 112):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Scene.cpp -o $(OBJD)/Scene.o
 
 AllocatorDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 129):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 124):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Allocator.cpp -o $(OBJD)/Allocator.o
 
 SwapChainDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 81):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 79):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/SwapChain.cpp -o $(OBJD)/SwapChain.o
 
 LinkDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 49):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 48):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -o $(BIND)/$(APP).exe \
 	$(OBJD)/main.o \
 	$(OBJD)/Instance.o \
@@ -536,7 +528,6 @@ LinkDebug:
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
 	$(OBJD)/Mesh.o \
-	$(OBJD)/DescriptorPool.o \
 	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
@@ -553,7 +544,7 @@ shaders:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 71):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 69):
 	$(GLSLC) $(SHADER_PATH)/shader.vert -o $(SHADER_PATH)/vert.spv
 	$(GLSLC) $(SHADER_PATH)/shader.frag -o $(SHADER_PATH)/frag.spv
 
@@ -561,44 +552,44 @@ InstanceDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 84):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 82):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Instance.cpp -o $(OBJD)/Instance.o
 
 ModelDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 105):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 103):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Model.cpp -o $(OBJD)/Model.o
 
 PipelineDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 120):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 118):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Pipeline.cpp -o $(OBJD)/Pipeline.o
 
 LogicalDeviceDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 96):
+#  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 94):
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/LogicalDevice.cpp -o $(OBJD)/LogicalDevice.o
 
 # files hash-table stats:
-# Load=29/1024=3%, Rehash=0, Collisions=1/78=1%
+# Load=28/1024=3%, Rehash=0, Collisions=1/75=1%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 31 / storage = 439 B / avg = 14 B
-# current buf: size = 8162 B / used = 439 B / count = 31 / avg = 14 B
+# strcache buffers: 1 (0) / strings = 30 / storage = 419 B / avg = 13 B
+# current buf: size = 8162 B / used = 419 B / count = 30 / avg = 13 B
 
-# strcache performance: lookups = 79 / hit rate = 60%
+# strcache performance: lookups = 76 / hit rate = 60%
 # hash-table stats:
-# Load=31/8192=0%, Rehash=0, Collisions=0/79=0%
-# Finished Make data base on Thu May  6 17:51:57 2021
+# Load=30/8192=0%, Rehash=0, Collisions=0/76=0%
+# Finished Make data base on Wed May 12 16:04:21 2021
 
  

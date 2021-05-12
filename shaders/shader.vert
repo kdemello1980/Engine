@@ -12,7 +12,7 @@ layout(set = 0, binding = 0) uniform GPUSceneData {
 
 // Vertex.
 layout(set = 0, binding = 1) uniform Vertex {
-    vec4 position;
+    vec3 position;
     vec3 normal;
     vec3 color;
     vec2 texCoord;
@@ -34,7 +34,7 @@ layout(location = 1) out vec2 fragTexCoord;
 
 void main()
 {
-
+    // gl_Position = vec4()
     fragColor = vertex.color;
     fragTexCoord = vertex.texCoord;
 }

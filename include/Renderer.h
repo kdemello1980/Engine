@@ -15,7 +15,7 @@
 #include "types.h"
 #include "Pipeline.h"
 #include "Allocator.h"
-#include "DescriptorPool.h"
+#include "DescriptorSet.h"
 
 namespace KMDM
 {
@@ -51,6 +51,7 @@ namespace KMDM
             SwapChain* m_swapChain;
             CommandPool* m_commandPool;
             Allocator* m_allocator;
+            DescriptorSet* m_descriptorSet;
 
             // Renderpass
             Renderpass* m_renderPass;
@@ -81,6 +82,9 @@ namespace KMDM
             // Camera buffer.
             // CameraData m_cameraData;
             std::vector<AllocatedBuffer> m_cameraBuffers;
+
+            // Descriptor set vector.
+            std::vector<VkDescriptorSet> m_descriptorSets;
     };
 }
 #endif // RENDERER_H

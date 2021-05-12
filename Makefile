@@ -18,7 +18,7 @@ BIND = bin/Debug
 DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug \
 	SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders \
 	CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug \
-	DescriptorPoolDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
+	DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
 
 Release:
 
@@ -39,7 +39,7 @@ Debug: $(DEBUG_TARGETS)
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
 	$(OBJD)/Mesh.o \
-	$(OBJD)/DescriptorPool.o \
+	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
 	$(OBJD)/Scene.o \
@@ -60,7 +60,6 @@ LinkDebug:
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
 	$(OBJD)/Mesh.o \
-	$(OBJD)/DescriptorPool.o \
 	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
@@ -118,9 +117,6 @@ Renderpassdebug:
 
 PipelineDebug:
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Pipeline.cpp -o $(OBJD)/Pipeline.o
-
-DescriptorPoolDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorPool.cpp -o $(OBJD)/DescriptorPool.o
 
 DescriptorSetDebug:
 	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorSet.cpp -o $(OBJD)/DescriptorSet.o

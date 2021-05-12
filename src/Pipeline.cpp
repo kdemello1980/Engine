@@ -5,7 +5,7 @@
 #include "SwapChain.h"
 #include "Pipeline.h"
 #include "Renderpass.h"
-#include "DescriptorPool.h"
+#include "DescriptorSet.h"
 
 
 #include <vulkan/vulkan.h>
@@ -19,11 +19,11 @@ namespace KMDM
      * 
      * @param render_pass 
      */
-    Pipeline::Pipeline(Renderpass* render_pass)
+    Pipeline::Pipeline(Renderpass* render_pass, DescriptorSet* descriptor_set)
     {
         m_renderPass = render_pass;
         m_logicalDevice = LogicalDevice::getInstance();
-        m_descriptorPool = new DescriptorPool();
+        m_descriptorSet = descriptor_set;
         createGraphicsPipeline();
     } 
 
@@ -197,7 +197,7 @@ namespace KMDM
         VkDynamicState dynamicStates[] =
         {
             VK_DYNAMIC_STATE_VIEWPORT,
-            VK_DYNAMIC_STATE_LINE_WIDTH
+            VK_DYNAMIC_STATE_SCISSOR
         };
         VkPipelineDynamicStateCreateInfo dynamicState = {};
         dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
@@ -206,10 +206,7 @@ namespace KMDM
 
         // Pipeline layout.
         VkDescriptorSetLayout layouts[] = {
-            m_descriptorPool->getPerFrameLayout(),
-            m_descriptorPool->getPerPassLayout(),
-            m_descriptorPool->getPerMaterialLayout(),
-            m_descriptorPool->getPerObjectLayout()
+            m_descriptorSet->getLayout()
         };
 
         // Push constants.
@@ -257,12 +254,14 @@ namespace KMDM
         pipeLineInfo.pMultisampleState = &multisampling;
         pipeLineInfo.pDepthStencilState = &depthStencil;
         pipeLineInfo.pColorBlendState = &colorBlending;
+        // pipeLineInfo.pDynamicState = &dynamicState;
         pipeLineInfo.pDynamicState = nullptr;
         pipeLineInfo.layout = m_graphicsPipelineLayout;
         pipeLineInfo.renderPass = m_renderPass->getRenderPass();
         pipeLineInfo.subpass = 0;
         pipeLineInfo.basePipelineHandle = VK_NULL_HANDLE;
         pipeLineInfo.basePipelineIndex = -1;
+        
 
         if (vkCreateGraphicsPipelines(m_logicalDevice->getLogicalDevice(), VK_NULL_HANDLE, 1,
             &pipeLineInfo, nullptr, &m_graphicsPipeline)
@@ -276,9 +275,4 @@ namespace KMDM
         vkDestroyShaderModule(m_logicalDevice->getLogicalDevice(), fragShaderModule, nullptr);
         vkDestroyShaderModule(m_logicalDevice->getLogicalDevice(), vertShaderModule, nullptr);
     } /// createGraphicsPipeline
-
-    DescriptorPool Pipeline::getDescriptorPool()
-    {
-        return *m_descriptorPool;
-    }
 }

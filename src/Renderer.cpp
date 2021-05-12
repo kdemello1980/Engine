@@ -10,7 +10,7 @@
 #include "Pipeline.h"
 #include "Util.h"
 #include "Allocator.h"
-#include "DescriptorPool.h"
+#include "DescriptorSet.h"
 
 #include <vulkan/vulkan.h>
 #include <stdexcept>
@@ -41,12 +41,13 @@ namespace KMDM
         m_swapChain = SwapChain::getInstance();
         m_commandPool = CommandPool::getInstance();
 
-
         // Get the number of swapchain images.
         m_numFramebuffers = m_swapChain->getSwapChainImages().size();
 
         m_renderPass = new Renderpass();
-        m_graphicsPipeline = new Pipeline(m_renderPass);
+        m_descriptorSet = new DescriptorSet(m_renderPass);
+        m_graphicsPipeline = new Pipeline(m_renderPass, m_descriptorSet);
+
 
         // Create the framebuffers.
         createFrameBuffers();
@@ -291,6 +292,7 @@ namespace KMDM
         }
 
         vkQueueWaitIdle(m_logicalDevice->getPresentationQueue());
+        m_descriptorSet->resetDescriptorPool();
         m_frameSyncObjects.incrementFrame();
     } /// drawFrame
 
@@ -353,9 +355,10 @@ namespace KMDM
         }
 
         // Do something with a descriptor set.
-        
+        std::vector<VkDescriptorSet> descriptorSets = m_descriptorSet->getDescriptorSets();
 
         // Begin recording command buffers.
+        size_t bindingIndex = 0;
         for (size_t i = 0; i < m_drawCommandBuffers.size(); i++)
         {
             VkCommandBufferBeginInfo beginInfo = {};
@@ -403,13 +406,15 @@ namespace KMDM
                 
                 // Bind the UBO descriptor sets.
                 vkCmdBindDescriptorSets(m_drawCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, 
-                    *m_graphicsPipeline->getPipelineLayout(), 0, 1, 
-                        &m_graphicsPipeline->getDescriptorPool().getPerObjectSet()[i], 0, nullptr);
+                    *m_graphicsPipeline->getPipelineLayout(), 0, 1, &descriptorSets[bindingIndex],
+                    0, nullptr);
+                bindingIndex++;
 
                 // Draw.
                 // vkCmdDraw(m_drawCommandBuffers[i], 3, 1, 0, 0);
 
                 vkCmdDrawIndexed(m_drawCommandBuffers[i], static_cast<uint32_t>(mesh.getIndices().size()), 1, 0, 0, 0);
+
             }
 
             vkCmdEndRenderPass(m_drawCommandBuffers[i]);

@@ -5,7 +5,7 @@
 #include "LogicalDevice.h"
 #include "Renderpass.h"
 #include "Pipeline.h"
-#include "DescriptorPool.h"
+#include "DescriptorSet.h"
 
 #include <vulkan/vulkan.h>
 
@@ -14,7 +14,7 @@ namespace KMDM
     class Pipeline
     {
         public:
-            Pipeline(Renderpass* render_pass);
+            Pipeline(Renderpass* render_pass, DescriptorSet* descriptor_set);
             virtual ~Pipeline();
             void destoryPipeline();
 
@@ -32,8 +32,8 @@ namespace KMDM
             LogicalDevice* m_logicalDevice;
             Renderpass* m_renderPass;
 
-            // Descriptor pool.
-            DescriptorPool *m_descriptorPool;
+            // Descriptor set layout.
+            DescriptorSet* m_descriptorSet;
     };
 }
 #endif // PIPELINE_H
