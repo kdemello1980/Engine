@@ -98,22 +98,24 @@ namespace KMDM
         m_renderPass = renderpass;
         m_logicalDevice = LogicalDevice::getInstance();
 
+        uint32_t uniformSizes = 2 * (MAX_DESCRIPTORS / 3);
+        uint32_t samplerSizes = MAX_DESCRIPTORS / 3;
         VkDescriptorPoolSize sizes[] = 
         {
             {
                 VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
-                2 * (MAX_DESCRIPTORS / 3)
+                uniformSizes
             },
             {
                 VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-                MAX_DESCRIPTORS / 3
+                samplerSizes
             }
         };
 
         VkDescriptorPoolCreateInfo poolInfo = {};
         poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
         poolInfo.maxSets = MAX_DESCRIPTORS;
-        poolInfo.poolSizeCount = MAX_DESCRIPTORS;
+        poolInfo.poolSizeCount = 2;
         poolInfo.pPoolSizes = sizes;
 
         if (vkCreateDescriptorPool(m_logicalDevice->getLogicalDevice(), &poolInfo, nullptr,
