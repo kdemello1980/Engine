@@ -7,6 +7,7 @@
 #include "../include/PhysicalDevice.h"
 #include "../include/Surface.h"
 #include "../include/types.h"
+#include "Util.h"
 
 namespace KMDM
 {
@@ -99,6 +100,14 @@ namespace KMDM
         m_swapChainImages.resize(num_images);
         vkGetSwapchainImagesKHR(m_logicalDevice->getLogicalDevice(), m_VKswapChain, &num_images, m_swapChainImages.data());
         std::cout << "Created " << num_images << " swapchain images." << std::endl;
+
+        m_swapChainImageViews.resize(num_images);
+        for (int i = 0; i < num_images; i++)
+        {
+            m_swapChainImageViews[i] = createImageView(m_swapChainImages[i], m_swapChainImageFormat,
+                VK_IMAGE_ASPECT_COLOR_BIT, 1);
+            std::cout << "Created swapchain imageview: " << i << std::endl;
+        }        
     }
 /******************************************************************************/
     /**

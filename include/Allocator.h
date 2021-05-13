@@ -6,7 +6,7 @@
 #define ALLOCATOR_H
 
 #include "types.h"
-
+// #define VMA_RECORDING_ENABLED 1
 #include "vk_mem_alloc.h"
 
 namespace KMDM

@@ -1,6 +1,6 @@
 CFLAGS = -Wall -std=c++20 -O2
 CFLAGS_DEBUG = -std=c++20 -g
-LDFLAGS = -lSDL2 -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi 
+LDFLAGS = -lSDL2 -lvulkan -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi
 INCLUDE = -Iinclude -I/data/system-software/stb -I/data/system-software/tinyobjloader -I/data/system-software/json/include/ \
 	-I/data/system-software/SDL2/include/SDL2 -I/data/system-software/VulkanMemoryAllocator/src
 
@@ -25,7 +25,7 @@ Release:
 .PHONY: shaders
 
 Debug: $(DEBUG_TARGETS)
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -o $(BIND)/$(APP).exe \
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -o $(BIND)/$(APP).exe \
 	$(OBJD)/main.o \
 	$(OBJD)/Instance.o \
 	$(OBJD)/Window.o \
@@ -46,7 +46,7 @@ Debug: $(DEBUG_TARGETS)
 	$(LDFLAGS)
 
 LinkDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -o $(BIND)/$(APP).exe \
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -o $(BIND)/$(APP).exe \
 	$(OBJD)/main.o \
 	$(OBJD)/Instance.o \
 	$(OBJD)/Window.o \
@@ -71,58 +71,58 @@ shaders:
 	$(GLSLC) $(SHADER_PATH)/shader.frag -o $(SHADER_PATH)/frag.spv
 
 commonDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Common.cpp -o $(OBJD)/Common.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Common.cpp -o $(OBJD)/Common.o
 
 mainDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c main.cpp -o $(OBJD)/main.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c main.cpp -o $(OBJD)/main.o
 
 SwapChainDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/SwapChain.cpp -o $(OBJD)/SwapChain.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/SwapChain.cpp -o $(OBJD)/SwapChain.o
 
 InstanceDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Instance.cpp -o $(OBJD)/Instance.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Instance.cpp -o $(OBJD)/Instance.o
 
 WindowDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Window.cpp -o $(OBJD)/Window.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Window.cpp -o $(OBJD)/Window.o
 
 PhysicalDeviceDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/PhysicalDevice.cpp -o $(OBJD)/PhysicalDevice.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/PhysicalDevice.cpp -o $(OBJD)/PhysicalDevice.o
 
 SurfaceDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Surface.cpp -o $(OBJD)/Surface.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Surface.cpp -o $(OBJD)/Surface.o
 
 LogicalDeviceDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/LogicalDevice.cpp -o $(OBJD)/LogicalDevice.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/LogicalDevice.cpp -o $(OBJD)/LogicalDevice.o
 
 RendererDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Renderer.cpp -o $(OBJD)/Renderer.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Renderer.cpp -o $(OBJD)/Renderer.o
 
 CommandPoolDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/CommandPool.cpp -o $(OBJD)/CommandPool.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/CommandPool.cpp -o $(OBJD)/CommandPool.o
 
 ModelDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Model.cpp -o $(OBJD)/Model.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Model.cpp -o $(OBJD)/Model.o
 
 MeshDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Mesh.cpp -o $(OBJD)/Mesh.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Mesh.cpp -o $(OBJD)/Mesh.o
 
 UtilDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Util.cpp -o $(OBJD)/Util.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Util.cpp -o $(OBJD)/Util.o
 
 SceneDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Scene.cpp -o $(OBJD)/Scene.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Scene.cpp -o $(OBJD)/Scene.o
 
 Renderpassdebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Renderpass.cpp -o $(OBJD)/Renderpass.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Renderpass.cpp -o $(OBJD)/Renderpass.o
 
 PipelineDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Pipeline.cpp -o $(OBJD)/Pipeline.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Pipeline.cpp -o $(OBJD)/Pipeline.o
 
 DescriptorSetDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/DescriptorSet.cpp -o $(OBJD)/DescriptorSet.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/DescriptorSet.cpp -o $(OBJD)/DescriptorSet.o
 
 AllocatorDebug:
-	$(COMPILER) $(INCLUDE) $(CFLAGS) -c src/Allocator.cpp -o $(OBJD)/Allocator.o
+	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Allocator.cpp -o $(OBJD)/Allocator.o
 
 
 cleanDebug:

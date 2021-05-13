@@ -63,6 +63,7 @@ namespace KMDM
         }
         VkPhysicalDeviceProperties props;
         vkGetPhysicalDeviceProperties(m_VKphysicalDevice, &props);
+        vkGetPhysicalDeviceMemoryProperties(m_VKphysicalDevice, &m_physicalDeviceMemoryProperties);
 //        std::cout << "Found physical device: " << props.deviceName << std::endl;
     }
 
@@ -184,4 +185,6 @@ namespace KMDM
         }
         throw std::runtime_error("Failed to find suitable format.");
     }
+
+    VkPhysicalDeviceMemoryProperties PhysicalDevice::getMemoryProperties() { return m_physicalDeviceMemoryProperties; }
 }

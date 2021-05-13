@@ -19,9 +19,13 @@
 #include <iostream>
 #include <stdexcept>
 
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h>
+// #define GLFW_INCLUDE_VULKAN
+// #include <GLFW/glfw3.h>
+// #include <GLFW/glfw3native.h>
+
+#include <SDL.h>
+#include <SDL_vulkan.h>
+#include <SDL_video.h>
 
 namespace KMDM
 {
@@ -42,12 +46,15 @@ namespace KMDM
         m_commandPool = CommandPool::getInstance();
 
         // Get the number of swapchain images.
-        m_numFramebuffers = m_swapChain->getSwapChainImages().size();
+        m_numFramebuffers = static_cast<size_t>(m_swapChain->getSwapChainImages().size());
 
         m_renderPass = new Renderpass();
         m_descriptorSet = new DescriptorSet(m_renderPass);
         m_graphicsPipeline = new Pipeline(m_renderPass, m_descriptorSet);
 
+
+        // Create depth buffer before the framebuffers.
+        createDepthResources();
 
         // Create the framebuffers.
         createFrameBuffers();
@@ -55,11 +62,8 @@ namespace KMDM
         // Initialize synchronization objects.
         createSyncObjects();
 
-        // Create depth buffer.
-        createDepthResources();
-
         // Create the camera buffer.
-        createCameraBuffers();
+        // createCameraBuffers();
     }
 
     void Renderer::recreateSwapChain()
@@ -145,6 +149,7 @@ namespace KMDM
 
             // Add camera to frameData
         }
+        std::cout << "Created framebuffers." << std::endl;
     }
 
 
@@ -158,23 +163,37 @@ namespace KMDM
         VkFormat depthFormat = m_renderPass->findDepthFormat();
 
         // Create the depth image.
-        m_depthImage = m_allocator->getVMAImage(
-            m_swapChain->getSwapChainExtent().width,
+        // m_depthImage = m_allocator->getVMAImage(
+        //     m_swapChain->getSwapChainExtent().width,
+        //     m_swapChain->getSwapChainExtent().height,
+        //     1,
+        //     depthFormat,
+        //     VK_IMAGE_TILING_OPTIMAL,
+        //     VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
+        //     VMA_MEMORY_USAGE_GPU_ONLY,
+        //     VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+        // );
+
+
+        // VkImageCreateInfo imageInfo = {};
+        // imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+        // imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+        // imageInfo.mipLevels = 1;
+
+        
+        createImage( m_swapChain->getSwapChainExtent().width, 
             m_swapChain->getSwapChainExtent().height,
             1,
             depthFormat,
             VK_IMAGE_TILING_OPTIMAL,
             VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
-            VMA_MEMORY_USAGE_GPU_ONLY,
-            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
+            m_depthImage,
+            m_depthMemory
         );
 
-        VkImageCreateInfo imageInfo = {};
-        imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-        imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-        imageInfo.mipLevels = 1;
-
-        m_depthImageView = createImageView(m_depthImage.image, depthFormat, VK_IMAGE_ASPECT_DEPTH_BIT, 1);
+        m_depthImageView = createImageView(m_depthImage, depthFormat, VK_IMAGE_ASPECT_DEPTH_BIT, 1);
+        std::cout << "Created depth imageview." << std::endl;
     }
 
     /**
@@ -191,6 +210,7 @@ namespace KMDM
             m_cameraBuffers[i] = m_allocator->getVMABuffer(sizeof(CameraData), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, 
                 VMA_MEMORY_USAGE_CPU_TO_GPU);
         }
+        std::cout << "Created camera buffers." << std::endl;
     }
 
 
@@ -425,4 +445,20 @@ namespace KMDM
             }
         }
     } /// createCommandBuffers
+
+    void Renderer::run()
+    {
+        SDL_Event event;
+        while(true)
+        {
+            while(SDL_PollEvent(&event) != 0)
+            {
+                if (event.type == SDL_QUIT)
+                {
+                    destroyRenderer();
+                    m_window->destoryWindow();
+                }
+            }
+        }
+    }
 }

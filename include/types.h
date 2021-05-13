@@ -16,6 +16,7 @@
 
 #include <array>
 #include <optional>
+// #define VMA_RECORDING_ENABLED 1
 #include "vk_mem_alloc.h"
 
 
@@ -53,7 +54,7 @@ namespace KMDM
         static VkVertexInputBindingDescription getBindingDescription()
         {
             VkVertexInputBindingDescription bindingDescription = {};
-            bindingDescription.binding = 1;
+            bindingDescription.binding = 0;
             bindingDescription.stride = sizeof(Vertex);
             bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
             return bindingDescription;

@@ -6,6 +6,7 @@
 
 
 #define VMA_IMPLEMENTATION
+// #define VMA_RECORDING_ENABLED 1
 #include "vk_mem_alloc.h"
 
 #include <stdexcept>
@@ -20,10 +21,14 @@ namespace KMDM
     */
     Allocator::Allocator()
     {
+        VmaRecordSettings recordSettings = {};
+        recordSettings.pFilePath = "/data/home/kenneth/Desktop/Programming/vulkan/Engine/src/vma.csv";
+
         VmaAllocatorCreateInfo allocatorInfo = {};
         allocatorInfo.physicalDevice = PhysicalDevice::getInstance()->getPhysicalDevice();
         allocatorInfo.device = LogicalDevice::getInstance()->getLogicalDevice();
         allocatorInfo.instance = Instance::getInstance()->getVulkanInstance();
+        // allocatorInfo.pRecordSettings = &recordSettings;
 
         vmaCreateAllocator(&allocatorInfo, &m_vmaAlocator);
     }

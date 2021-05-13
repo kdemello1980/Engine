@@ -17,6 +17,8 @@ namespace KMDM
 
             VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates,
                 VkImageTiling tiling, VkFormatFeatureFlags features);
+            
+            VkPhysicalDeviceMemoryProperties getMemoryProperties();
 
         protected:
             SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
@@ -30,6 +32,7 @@ namespace KMDM
             static PhysicalDevice* m_physicalDevice;
             static VkPhysicalDevice m_VKphysicalDevice;
             SwapChainSupportDetails m_SwapChainDetails;
+            VkPhysicalDeviceMemoryProperties m_physicalDeviceMemoryProperties;
     };
 }
 #endif // PHYSICALDEVICE_H

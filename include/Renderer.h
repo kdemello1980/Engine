@@ -27,7 +27,8 @@ namespace KMDM
             virtual ~Renderer();
 
             void drawFrame();
-
+            void run();
+            
         protected:
             void createFrameBuffers();
             void createSyncObjects();
@@ -35,6 +36,7 @@ namespace KMDM
             void recreateSwapChain();
             void createDepthResources();
             void createCameraBuffers();
+           
 
         private:
             Renderer();
@@ -58,7 +60,7 @@ namespace KMDM
 
             // Framebuffers
             std::vector<VkFramebuffer> m_framebuffers;
-            uint32_t m_numFramebuffers;
+            size_t m_numFramebuffers;
 
             // FrameData
             std::vector<FrameData> m_frameData;
@@ -73,11 +75,9 @@ namespace KMDM
             Pipeline* m_graphicsPipeline;
 
             // Depth resources.
-            // VkBuffer m_depthBuffer;
-            // VkDeviceMemory m_depthBufferMemory;
-            // VkImage m_depthImage;
             VkImageView m_depthImageView;
-            AllocatedImage m_depthImage;
+            VkImage m_depthImage;
+            VkDeviceMemory m_depthMemory;
 
             // Camera buffer.
             // CameraData m_cameraData;
