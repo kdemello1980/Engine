@@ -1,5 +1,5 @@
 #include "../include/Scene.h"
-#include "../include/Mesh.h"
+#include "../include/Model.h"
 
 
 #include <vector>
@@ -24,17 +24,30 @@ namespace KMDM
 
     Scene::Scene()
     {
-        Mesh m = Mesh(std::string("models/Indonesian_statue.stl"), std::string("head"));
+        Model m = Model(std::string("models/Indonesian_statue.stl"), std::string("head"));
         m_meshes.push_back(m);
     }
 
     Scene::~Scene()
     {
-        //dtor
+        destoryScene();
+    }
+
+    /**
+     * @brief Clean up all of the Mesh objects in the scene.
+     * 
+     */
+    void Scene::destoryScene()
+    {
+        for (auto & mesh : m_meshes)
+        {
+            mesh.destroyModel();
+        }    
+        m_scene = nullptr;    
     }
 
 
-    std::vector<Mesh> Scene::getMeshes()
+    std::vector<Model> Scene::getMeshes()
     {
         return m_meshes;
     }
@@ -44,7 +57,7 @@ namespace KMDM
     * 
     * @param mesh 
     */
-    void Scene::addMesh(Mesh mesh)
+    void Scene::addMesh(Model mesh)
     {
         m_meshes.push_back(mesh);
     }

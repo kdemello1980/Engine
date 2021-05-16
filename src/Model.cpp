@@ -28,6 +28,9 @@ namespace KMDM
         vkDestroyBuffer(LogicalDevice::getInstance()->getLogicalDevice(), m_vertexBuffer, nullptr);
         vkFreeMemory(LogicalDevice::getInstance()->getLogicalDevice(), m_vertexBufferMemory, nullptr);
 
+        vkDestroyBuffer(LogicalDevice::getInstance()->getLogicalDevice(), m_indexBuffer, nullptr);
+        vkFreeMemory(LogicalDevice::getInstance()->getLogicalDevice(), m_indexBufferMemory, nullptr);
+
         vkDestroySampler(LogicalDevice::getInstance()->getLogicalDevice(), m_textureImageSampler, nullptr);
         vkDestroyImageView(LogicalDevice::getInstance()->getLogicalDevice(), m_textureImageView, nullptr);
         vkDestroyImage(LogicalDevice::getInstance()->getLogicalDevice(), m_textureImage, nullptr);
@@ -37,16 +40,6 @@ namespace KMDM
     Model::~Model()
     {
         destroyModel();
-    }
-
-    std::vector<uint32_t> Model::getIndices()
-    {
-        return m_indices;
-    }
-
-    VkBuffer Model::getVertexBuffer()
-    {
-        return m_vertexBuffer;
     }
 
     /******************************************************************
@@ -107,9 +100,10 @@ namespace KMDM
         }
     } /// loadModel
 
-    /******************************************************************
-        Create the vertex buffer.
-    *******************************************************************/
+    /**
+     * @brief Load the verticies into a buffer in device local memory.
+     * 
+     */
     void Model::createVertexBuffer()
     {
         VkDeviceSize bufferSize = sizeof(m_vertices[0]) * m_vertices.size();
@@ -137,6 +131,28 @@ namespace KMDM
     } /// createVertexBuffer
 
 
+    void Model::createIndexBuffer()
+    {
+        VkDeviceSize bufferSize = sizeof(m_indices[0]) * m_indices.size();
+        VkBuffer stagingBuffer;
+        VkDeviceMemory stagingMemory;
+
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+            | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingMemory);
+        
+        void *data;
+        vkMapMemory(LogicalDevice::getInstance()->getLogicalDevice(), stagingMemory, 0, bufferSize, 0, &data);
+        memcpy(data, m_indices.data(), (size_t)bufferSize);
+        vkUnmapMemory(LogicalDevice::getInstance()->getLogicalDevice(), stagingMemory);
+        
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, m_indexBuffer, m_indexBufferMemory);
+
+        copyBuffer(stagingBuffer, m_indexBuffer, bufferSize);
+
+        vkDestroyBuffer(LogicalDevice::getInstance()->getLogicalDevice(), stagingBuffer, nullptr);
+        vkFreeMemory(LogicalDevice::getInstance()->getLogicalDevice(), m_indexBufferMemory, nullptr);
+    }
 
     /******************************************************************
         Create the texture image.
@@ -397,4 +413,8 @@ namespace KMDM
             throw std::runtime_error("Failed to create texture sampler.");
         }
     } /// createTextureSampler
+
+    uint32_t Model::getIndexCount() { return static_cast<uint32_t>(m_indices.size()); }
+    VkBuffer Model::getVertexBuffer() { return m_vertexBuffer; }
+    VkBuffer Model::getIndexBuffer() { return m_indexBuffer; }
 }

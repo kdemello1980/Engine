@@ -27,7 +27,11 @@ namespace KMDM
     {
         return m_VKswapChain;
     }
-/******************************************************************************/
+
+    /**
+     * @brief Construct a new Swap Chain:: Swap Chain object
+     * 
+     */
     SwapChain::SwapChain()
     {
         // Singletons.
@@ -96,8 +100,9 @@ namespace KMDM
         if (num_images == 0)
         {
             throw std::runtime_error("Failed to retrieve swapchain images.");
-        }
+        }        
         m_swapChainImages.resize(num_images);
+
         vkGetSwapchainImagesKHR(m_logicalDevice->getLogicalDevice(), m_VKswapChain, &num_images, m_swapChainImages.data());
         std::cout << "Created " << num_images << " swapchain images." << std::endl;
 
@@ -109,26 +114,22 @@ namespace KMDM
             std::cout << "Created swapchain imageview: " << i << std::endl;
         }        
     }
-/******************************************************************************/
+
     /**
-        Destory the swapchain.
-    */
+     * @brief Destory the SwapChain.
+     * 
+     */
     void SwapChain::destroySwapChain()
     {
         if (m_swapChain)
         {
-            for (auto & view : m_swapChainImageViews)
+            for (size_t i = 0; i < m_swapChainImageViews.size(); i++)
             {
-                vkDestroyImageView(m_logicalDevice->getLogicalDevice(), view, nullptr);
+                vkDestroyImageView(m_logicalDevice->getLogicalDevice(), m_swapChainImageViews[i], nullptr);
             }
-
-            for (auto & image : m_swapChainImages)
-            {
-                vkDestroyImage(m_logicalDevice->getLogicalDevice(), image, nullptr);
-            }
-
             vkDestroySwapchainKHR(m_logicalDevice->getLogicalDevice(), m_VKswapChain, nullptr);
         }
+        std::cout << "- Cleaning up SwapChain." << std::endl;
     }
 /******************************************************************************/
     SwapChain::~SwapChain()

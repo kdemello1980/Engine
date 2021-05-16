@@ -26,6 +26,7 @@ namespace KMDM
             Mesh(std::string path, const std::string name);
             Mesh(const Mesh &m);
             virtual ~Mesh();
+            void destroyMesh();
 
             void loadModel(std::string path);
 
@@ -48,9 +49,6 @@ namespace KMDM
              */
             void setName(const std::string name);
 
-
-            void setMaterial(Material material);
-
             void setTransform(glm::mat4 transform);
 
         protected:
@@ -68,9 +66,6 @@ namespace KMDM
 
             // Mesh name.
             std::string m_name;
-
-            // Material.  Pipeline and layout.
-            Material m_material;
 
             // Transform matrix.
             glm::mat4 m_transformMatrix;

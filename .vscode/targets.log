@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu May 13 12:03:06 2021
+# Make data base, printed on Sun May 16 10:16:53 2021
 
 # Variables
 
@@ -17,13 +17,15 @@ JAVA_HOME = /usr/java/jdk1.8.0_251-amd64
 # environment
 QEMU_AUDIO_DRV = pa
 # environment
+GDK_BACKEND = x11
+# environment
 LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
 # environment
 GTK_RC_FILES = /etc/gtk/gtkrc:/data/home/kenneth/.gtkrc:/data/home/kenneth/.config/gtkrc
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1001/vscode-ipc-1adf5994-b3a5-49dc-98bc-437b650ef13b.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1001/vscode-ipc-87ccdc02-2798-403e-96f7-3970d9f355cc.sock
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 9)
 SRC_DIR := src
 # environment
@@ -36,6 +38,10 @@ GPG_TTY = not a tty
 MACHTYPE = x86_64-suse-linux
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 13)
 APP = Engine
+# environment
+MODULES_CMD = /usr/lib64/Modules/modulecmd.tcl
+# environment
+MODULEPATH_modshare = /usr/share/modules:1
 # default
 MAKE_COMMAND := make
 # automatic
@@ -77,7 +83,7 @@ SSH_ASKPASS = /usr/libexec/ssh/ssh-askpass
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1001/xauth_AUkvpy
+XAUTHORITY = /run/user/1001/xauth_BBWkRe
 # default
 .LOADED := 
 # environment
@@ -89,6 +95,62 @@ MAKEFLAGS = pqrR
 # makefile
 CURDIR := /data/home/kenneth/Desktop/Programming/vulkan/Engine
 # environment
+define BASH_FUNC_module%%
+() {  unset _mlshdbg;
+ if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then
+ case "$-" in 
+ *v*x*)
+ set +vx;
+ _mlshdbg='vx'
+ ;;
+ *v*)
+ set +v;
+ _mlshdbg='v'
+ ;;
+ *x*)
+ set +x;
+ _mlshdbg='x'
+ ;;
+ *)
+ _mlshdbg=''
+ ;;
+ esac;
+ fi;
+ unset _mlre _mlIFS;
+ if [ -n "${IFS+x}" ]; then
+ _mlIFS=$IFS;
+ fi;
+ IFS=' ';
+ for _mlv in ${MODULES_RUN_QUARANTINE:-};
+ do
+ if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then
+ if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then
+ _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";
+ fi;
+ _mlrv="MODULES_RUNENV_${_mlv}";
+ _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";
+ fi;
+ done;
+ if [ -n "${_mlre:-}" ]; then
+ eval `eval ${_mlre} /usr/bin/tclsh /usr/lib64/Modules/modulecmd.tcl bash '"$@"'`;
+ else
+ eval `/usr/bin/tclsh /usr/lib64/Modules/modulecmd.tcl bash "$@"`;
+ fi;
+ _mlstatus=$?;
+ if [ -n "${_mlIFS+x}" ]; then
+ IFS=$_mlIFS;
+ else
+ unset IFS;
+ fi;
+ unset _mlre _mlv _mlrv _mlIFS;
+ if [ -n "${_mlshdbg:-}" ]; then
+ set -$_mlshdbg;
+ fi;
+ unset _mlshdbg;
+ return $_mlstatus
+}
+endef
+# environment
 VSCODE_PIPE_LOGGING = true
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
@@ -99,7 +161,7 @@ LESSOPEN = lessopen.sh %s
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-yM2TGRfdDkVz/agent.3097
+SSH_AUTH_SOCK = /tmp/ssh-cLk5j7b41sHD/agent.18477
 # default
 .SHELLFLAGS := -c
 # environment
@@ -125,7 +187,7 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 15)
 OBJD = src/Debug
 # environment
-VSCODE_PID = 2333
+VSCODE_PID = 1865
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -137,11 +199,13 @@ INPUT_METHOD = ibus
 # environment
 SDK_HOME = /usr/lib64/jvm/java
 # environment
-SESSION_MANAGER = local/alcyone:@/tmp/.ICE-unix/3274,unix/alcyone:/tmp/.ICE-unix/3274
+SESSION_MANAGER = local/alcyone:@/tmp/.ICE-unix/18656,unix/alcyone:/tmp/.ICE-unix/18656
 # automatic
 *F = $(notdir $*)
 # environment
 MANPATH = /usr/local/man:/usr/local/share/man:/usr/share/man
+# environment
+MODULEPATH = /usr/share/modules
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
@@ -158,12 +222,19 @@ BIND = bin/Debug
 JAVA_BINDIR = /usr/lib64/jvm/java/bin
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+define BASH_FUNC_ml%%
+() {  module ml "$@"
+}
+endef
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 4)
 INCLUDE = -Iinclude -I/data/system-software/stb -I/data/system-software/tinyobjloader -I/data/system-software/json/include/ -I/data/system-software/SDL2/include/SDL2 -I/data/system-software/VulkanMemoryAllocator/src
 # environment
 BREAKPAD_DUMP_LOCATION = /data/home/kenneth/.config/Code/exthost Crash Reports
 # default
 MAKE_HOST := x86_64-suse-linux-gnu
+# environment
+ENV = /usr/share/Modules/init/profile.sh
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 10)
 COMPILER = clang++
 # makefile
@@ -182,10 +253,14 @@ MAKE = $(MAKE_COMMAND)
 PATH = /data/home/kenneth/.cargo/bin:/data/home/kenneth/.cargo/bin:/usr/java/jdk1.8.0_251-amd64/bin:/data/home/kenneth/bin:/usr/local/bin:/usr/bin:/bin:/data/home/kenneth/.dotnet/tools:/data/home/kenneth/bin:/export/home/kenneth/.dotnet/tools:/data/home/kenneth/.local/bin:/data/home/kenneth/.local/bin:/data/home/kenneth/bin:/export/home/kenneth/.dotnet/tools
 # default
 MAKEFILES := 
+# environment
+MODULESHOME = /usr
 # automatic
 ^F = $(notdir $^)
 # environment
 CHOKIDAR_USEPOLLING = 1
+# environment
+LOADEDMODULES = 
 # environment
 OSTYPE = linux
 # environment
@@ -239,9 +314,37 @@ AUDIODRIVER = pulseaudio
 # environment
 G_FILENAME_ENCODING = @locale,UTF-8,ISO-8859-15,CP1252
 # environment
+BASH_ENV = /usr/share/Modules/init/bash
+# environment
 XDG_VTNR = 7
 # makefile
 .DEFAULT_GOAL := Release
+# environment
+define BASH_FUNC_switchml%%
+() {  typeset swfound=1;
+ if [ "${MODULES_USE_COMPAT_VERSION:-0}" = '1' ]; then
+ typeset swname='main';
+ if [ -e /usr/lib64/Modules//modulecmd.tcl ]; then
+ typeset swfound=0;
+ unset MODULES_USE_COMPAT_VERSION;
+ fi;
+ else
+ typeset swname='compatibility';
+ if [ -e /usr/lib64/Modules//modulecmd-compat ]; then
+ typeset swfound=0;
+ MODULES_USE_COMPAT_VERSION=1;
+ export MODULES_USE_COMPAT_VERSION;
+ fi;
+ fi;
+ if [ $swfound -eq 0 ]; then
+ echo "Switching to Modules $swname version";
+ source /usr/share/Modules/init/bash;
+ else
+ echo "Cannot switch to Modules $swname version, command not found";
+ return 1;
+ fi
+}
+endef
 # environment
 DISPLAY = :0
 # environment
@@ -261,11 +364,11 @@ DEBUGINFOD_URLS = https://debuginfod.opensuse.org/
 # environment
 CVS_RSH = ssh
 # environment
-SSH_AGENT_PID = 3185
+SSH_AGENT_PID = 18571
 # environment
 PAGER = less
 # environment
-VSCODE_NODE_CACHED_DATA_DIR = /data/home/kenneth/.config/Code/CachedData/3c4e3df9e89829dce27b7b5c24508306b151f30d
+VSCODE_NODE_CACHED_DATA_DIR = /data/home/kenneth/.config/Code/CachedData/054a9295330880ed74ceaedda236253b4f39a335
 # environment
 _ = /usr/bin/make
 # environment
@@ -302,13 +405,13 @@ JDK_HOME = /usr/lib64/jvm/java
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1001/vscode-aca0bb59-1.55.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1001/vscode-aca0bb59-1.56.2-main.sock
 # environment
 TERM = xterm
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 7)
 GLSLC = /data/system-software/glslc/bin/glslc
 # environment
-XDG_SESSION_ID = 2
+XDG_SESSION_ID = 5
 # environment
 XCURSOR_SIZE = 32
 # default
@@ -334,11 +437,11 @@ QT4_IM_MODULE = xim
 # environment
 KDE_FULL_SESSION = true
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 18)
-DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
+DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug ModelDebug SwapChainDebug PipelineDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
 # environment
 JRE_HOME = /usr/lib64/jvm/java
 # variable set hash-table stats:
-# Load=161/1024=16%, Rehash=0, Collisions=18/192=9%
+# Load=172/1024=17%, Rehash=0, Collisions=19/203=9%
 
 # Pattern-specific Variable Values
 
@@ -362,7 +465,6 @@ SurfaceDebug:
 #  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 92):
 	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/Surface.cpp -o $(OBJD)/Surface.o
 
- 
 PhysicalDeviceDebug:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -377,7 +479,7 @@ DescriptorSetDebug:
 #  recipe to execute (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 122):
 	$(COMPILER) $(INCLUDE) $(CFLAGS_DEBUG) -c src/DescriptorSet.cpp -o $(OBJD)/DescriptorSet.o
 
-Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
+Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders CommandPoolDebug Renderpassdebug ModelDebug SwapChainDebug PipelineDebug DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -395,7 +497,7 @@ Debug: mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug SurfaceDebug Logi
 	$(OBJD)/Renderpass.o \
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
-	$(OBJD)/Mesh.o \
+	$(OBJD)/Model.o \
 	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
@@ -426,7 +528,8 @@ Renderpassdebug:
 # Not a target:
 /data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-05-13 11:57:15.689258508
+ 
+#  Last modified 2021-05-16 10:16:21.459503577
 #  File has been updated.
 #  Successfully updated.
 
@@ -530,7 +633,7 @@ LinkDebug:
 	$(OBJD)/Renderpass.o \
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
-	$(OBJD)/Mesh.o \
+	$(OBJD)/Model.o \
 	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
@@ -593,6 +696,6 @@ LogicalDeviceDebug:
 # strcache performance: lookups = 76 / hit rate = 60%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=0/76=0%
-# Finished Make data base on Thu May 13 12:03:06 2021
+# Finished Make data base on Sun May 16 10:16:53 2021
 
  

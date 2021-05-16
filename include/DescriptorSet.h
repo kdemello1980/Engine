@@ -3,7 +3,7 @@
 #define DESCRIPTORSET_H
 
 #include "LogicalDevice.h"
-#include "DescriptorPool.h"
+#include "Renderpass.h"
 
 #include <vulkan/vulkan.h>
 #include <vector>
@@ -15,6 +15,7 @@ namespace KMDM
         public:
             DescriptorSet(Renderpass *renderpass);
             ~DescriptorSet();
+            void destoryDescriptorSet();
 
             VkDescriptorSetLayout getLayout();
             std::vector<VkDescriptorSet> getDescriptorSets();

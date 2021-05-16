@@ -190,16 +190,6 @@ namespace KMDM
         VkDescriptorSet globalDescriptor;
     };
 
-/******************************************************************************/
-
-    // Material.
-    struct Material
-    {
-        VkPipeline* pipeline;
-        VkPipelineLayout* pipelineLayout;
-    };
-
-/******************************************************************************/
 
     /**
      * @brief struct representing a scene.

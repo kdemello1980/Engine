@@ -41,6 +41,8 @@ namespace KMDM
         {
             SDL_DestroyWindow(m_SDLwindow);
             m_SDLwindow = nullptr;
+            SDL_Quit();
+            std::cout << "- Cleaning up window." << std::endl;
         }
     }
 

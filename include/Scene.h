@@ -1,6 +1,6 @@
 #ifndef SCENE_H
 #define SCENE_H
-#include "Mesh.h"
+#include "Model.h"
 
 #include <unordered_map>
 #include <vector>
@@ -16,14 +16,10 @@ namespace KMDM
             static Scene* getInstance();
             virtual ~Scene();
 
-            /**
-             * @brief 
-             * 
-             * @param mesh 
-             */
-            void addMesh(Mesh mesh);
+            void destoryScene();
+            void addMesh(Model model);
 
-            std::vector<Mesh> getMeshes();
+            std::vector<Model> getMeshes();
 
         protected:
 
@@ -31,7 +27,7 @@ namespace KMDM
         private:
             Scene();
             static Scene* m_scene;
-            std::vector<Mesh> m_meshes;
+            std::vector<Model> m_meshes;
             // std::unordered_map<std::string, Mesh> m_meshes;
             GPUSceneData m_sceneData;
     };

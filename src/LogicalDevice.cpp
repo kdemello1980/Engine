@@ -114,6 +114,7 @@ namespace KMDM
     {
         vkDestroyDevice(m_VKDevice, nullptr);
         m_logicalDevice = nullptr;
+        std::cout << "- Destorying logical device." << std::endl;
     }
 
     LogicalDevice::~LogicalDevice()

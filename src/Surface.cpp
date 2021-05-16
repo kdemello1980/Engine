@@ -46,5 +46,6 @@ namespace KMDM
     {
         vkDestroySurfaceKHR(Instance::getInstance()->getVulkanInstance(), m_VKsurface, nullptr);
         m_surface = nullptr;
+        std::cout << "- Cleaning up surface." << std::endl;
     }
 }

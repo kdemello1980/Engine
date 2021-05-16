@@ -63,7 +63,7 @@ namespace KMDM
      */
     void CommandPool::destroyCommandPool()
     {
-        std::cout << "Destroying CommandPool." << std::endl;
+        std::cout << "- Destroying CommandPool." << std::endl;
         vkDestroyCommandPool(LogicalDevice::getInstance()->getLogicalDevice(), m_VKcommandPool, nullptr);
         m_commandPool = nullptr;
     }

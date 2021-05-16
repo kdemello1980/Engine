@@ -52,6 +52,8 @@ namespace KMDM
         m_descriptorSet = new DescriptorSet(m_renderPass);
         m_graphicsPipeline = new Pipeline(m_renderPass, m_descriptorSet);
 
+        // Create the command buffers.
+        createCommandBuffers();
 
         // Create depth buffer before the framebuffers.
         createDepthResources();
@@ -63,7 +65,7 @@ namespace KMDM
         createSyncObjects();
 
         // Create the camera buffer.
-        // createCameraBuffers();
+        createCameraBuffers();
     }
 
     void Renderer::recreateSwapChain()
@@ -78,10 +80,28 @@ namespace KMDM
      */
     void Renderer::destroyRenderer()
     {
+        // vkDeviceWaitIdle(m_logicalDevice->getLogicalDevice());
         std::cout << "- Cleaning up Renderer." << std::endl;
-        delete(m_renderPass);
+
+        cleanupDepthResources();
+        cleanupCameraBuffers();
+
+        for (auto & framebuffer : m_framebuffers)
+        {
+            vkDestroyFramebuffer(m_logicalDevice->getLogicalDevice(), framebuffer, nullptr);
+        }
+
         m_commandPool->destroyCommandPool();
+
+        delete(m_graphicsPipeline);
+        delete(m_renderPass);
+        delete(m_descriptorSet);
+
+        
+
         m_swapChain->destroySwapChain();
+        cleanupSyncObjects();
+
         m_logicalDevice->destroyLogicalDevice();
         m_surface->destroySurface();
         m_instance->destoryInstance();
@@ -94,12 +114,7 @@ namespace KMDM
      */
     Renderer::~Renderer()
     {
-        // Destory the camera buffers.
-        for (size_t i = 0; i < m_cameraBuffers.size(); i++)
-        {
-            vmaDestroyBuffer(m_allocator->getAllocator(), m_cameraBuffers[i].buffer, m_cameraBuffers[i].allocation);
-        }
-
+        std::cout << "-- Calling Renderer destructor." << std::endl;
         destroyRenderer();
     }
 
@@ -197,6 +212,17 @@ namespace KMDM
     }
 
     /**
+     * @brief Clean up the depth resources.
+     * 
+     */
+    void Renderer::cleanupDepthResources()
+    {
+        vkDestroyImageView(m_logicalDevice->getLogicalDevice(), m_depthImageView, nullptr);
+        vkDestroyImage(m_logicalDevice->getLogicalDevice(), m_depthImage, nullptr);
+        vkFreeMemory(m_logicalDevice->getLogicalDevice(), m_depthMemory, nullptr);
+    }
+
+    /**
      * @brief Create the camera buffers.
      * 
      */
@@ -204,13 +230,30 @@ namespace KMDM
     {
         size_t size = SwapChain::getInstance()->getSwapChainImages().size();
         m_cameraBuffers.resize(size);
+        m_cameraMemory.resize(size);
 
         for (size_t i = 0; i < size; i++)
         {
-            m_cameraBuffers[i] = m_allocator->getVMABuffer(sizeof(CameraData), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, 
-                VMA_MEMORY_USAGE_CPU_TO_GPU);
+            createBuffer(sizeof(CameraData), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, 
+                VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
+                m_cameraBuffers[i], m_cameraMemory[i] );
         }
         std::cout << "Created camera buffers." << std::endl;
+    }
+
+    /**
+     * @brief Clean up the camera buffers.
+     * 
+     */
+    void Renderer::cleanupCameraBuffers()
+    {
+        // Destory the camera buffers.
+        for (size_t i = 0; i < m_cameraBuffers.size(); i++)
+        {
+            vkDestroyBuffer(m_logicalDevice->getLogicalDevice(), m_cameraBuffers[i], nullptr);
+            vkFreeMemory(m_logicalDevice->getLogicalDevice(), m_cameraMemory[i], nullptr);
+            std::cout << "- Cleaning up camera buffers." << std::endl;
+        }
     }
 
 
@@ -356,6 +399,29 @@ namespace KMDM
     }
 
     /**
+     * @brief Clean up semaphores and fences.
+     * 
+     */
+    void Renderer::cleanupSyncObjects()
+    {
+        for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
+        {
+            vkDestroySemaphore(m_logicalDevice->getLogicalDevice(), 
+                m_frameSyncObjects.imageAvailableSemaphores[i], nullptr);
+
+            vkDestroySemaphore(m_logicalDevice->getLogicalDevice(), 
+                m_frameSyncObjects.renderFinishedSemaphores[i], nullptr);
+
+            vkDestroyFence(m_logicalDevice->getLogicalDevice(),
+                m_frameSyncObjects.imagesInFlight[i], nullptr);
+
+            vkDestroyFence(m_logicalDevice->getLogicalDevice(),
+                m_frameSyncObjects.inflightFences[i], nullptr);
+        }
+        std::cout << "- Cleaning up semaphores and fences." << std::endl;
+    }
+
+    /**
      * @brief Create the command buffers for issuing draw calls.
      * 
      */
@@ -420,9 +486,9 @@ namespace KMDM
                 // vertexBuffers.push_back(mesh.getVertexBuffer());
                 // indexBuffers.
                 VkDeviceSize offsets[] = {0};
-                VkBuffer buffers[] =  { mesh.getVertexBuffer().buffer };
+                VkBuffer buffers[] =  { mesh.getVertexBuffer() };
                 vkCmdBindVertexBuffers(m_drawCommandBuffers[i], 0, 1, buffers, offsets);
-                vkCmdBindIndexBuffer(m_drawCommandBuffers[i], mesh.getIndexBuffer().buffer, 0, VK_INDEX_TYPE_UINT32);
+                vkCmdBindIndexBuffer(m_drawCommandBuffers[i], mesh.getIndexBuffer(), 0, VK_INDEX_TYPE_UINT32);
                 
                 // Bind the UBO descriptor sets.
                 vkCmdBindDescriptorSets(m_drawCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, 
@@ -433,7 +499,7 @@ namespace KMDM
                 // Draw.
                 // vkCmdDraw(m_drawCommandBuffers[i], 3, 1, 0, 0);
 
-                vkCmdDrawIndexed(m_drawCommandBuffers[i], static_cast<uint32_t>(mesh.getIndices().size()), 1, 0, 0, 0);
+                vkCmdDrawIndexed(m_drawCommandBuffers[i], mesh.getIndexCount(), 1, 0, 0, 0);
 
             }
 
@@ -456,9 +522,10 @@ namespace KMDM
                 if (event.type == SDL_QUIT)
                 {
                     destroyRenderer();
-                    m_window->destoryWindow();
+                    // m_window->destoryWindow();
                 }
             }
+            drawFrame();
         }
     }
 }

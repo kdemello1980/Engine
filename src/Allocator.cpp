@@ -30,7 +30,10 @@ namespace KMDM
         allocatorInfo.instance = Instance::getInstance()->getVulkanInstance();
         // allocatorInfo.pRecordSettings = &recordSettings;
 
-        vmaCreateAllocator(&allocatorInfo, &m_vmaAlocator);
+        if (vmaCreateAllocator(&allocatorInfo, &m_vmaAlocator) != VK_SUCCESS)
+        {
+            throw std::runtime_error("Failed to create VMA Allocator.");
+        }
     }
 
     /*
@@ -68,10 +71,15 @@ namespace KMDM
         VkBufferCreateInfo bufferInfo = {};
         bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
         bufferInfo.size = size;
-        bufferInfo.usage = vma_usage;
+        bufferInfo.usage = buffer_usage;
 
         VmaAllocationCreateInfo vmaallocInfo = {};
         vmaallocInfo.usage = vma_usage;
+
+        VmaAllocationInfo allocationInfo = {};
+        allocationInfo.size = size;
+        allocationInfo.offset = 0;
+        
 
         AllocatedBuffer ret = {};
 

@@ -100,6 +100,7 @@ namespace KMDM
     {
         vkDestroyInstance(m_vkInstance, nullptr);
         m_instance = nullptr;
+        std::cout << "- Cleaning up instance." << std::endl;
     }
 
     Instance::~Instance()

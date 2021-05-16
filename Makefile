@@ -17,7 +17,7 @@ BIND = bin/Debug
 
 DEBUG_TARGETS = mainDebug InstanceDebug WindowDebug PhysicalDeviceDebug \
 	SurfaceDebug LogicalDeviceDebug RendererDebug commonDebug shaders \
-	CommandPoolDebug Renderpassdebug MeshDebug SwapChainDebug PipelineDebug \
+	CommandPoolDebug Renderpassdebug ModelDebug SwapChainDebug PipelineDebug \
 	DescriptorSetDebug AllocatorDebug UtilDebug SceneDebug
 
 Release:
@@ -38,7 +38,7 @@ Debug: $(DEBUG_TARGETS)
 	$(OBJD)/Renderpass.o \
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
-	$(OBJD)/Mesh.o \
+	$(OBJD)/Model.o \
 	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \
@@ -59,7 +59,7 @@ LinkDebug:
 	$(OBJD)/Renderpass.o \
 	$(OBJD)/SwapChain.o \
 	$(OBJD)/Pipeline.o \
-	$(OBJD)/Mesh.o \
+	$(OBJD)/Model.o \
 	$(OBJD)/DescriptorSet.o \
 	$(OBJD)/Allocator.o \
 	$(OBJD)/Util.o \

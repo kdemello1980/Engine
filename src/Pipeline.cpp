@@ -33,8 +33,7 @@ namespace KMDM
      */
     Pipeline::~Pipeline()
     {
-        vkDestroyPipelineLayout(m_logicalDevice->getLogicalDevice(), m_graphicsPipelineLayout, nullptr);
-        vkDestroyPipeline(m_logicalDevice->getLogicalDevice(), m_graphicsPipeline, nullptr);
+        destoryPipeline();
     }
 
     /**
@@ -43,7 +42,7 @@ namespace KMDM
      */
     void Pipeline::destoryPipeline()
     {
-        std::cout << "Cleaning up Pipeline." << std::endl;
+        std::cout << "- Cleaning up Pipeline." << std::endl;
         vkDestroyPipelineLayout(m_logicalDevice->getLogicalDevice(), m_graphicsPipelineLayout, nullptr);
         vkDestroyPipeline(m_logicalDevice->getLogicalDevice(), m_graphicsPipeline, nullptr);
     }

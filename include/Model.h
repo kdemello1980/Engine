@@ -16,29 +16,28 @@ namespace KMDM
             virtual ~Model();
 
             VkBuffer getVertexBuffer();
-            std::vector<uint32_t> getIndices();
+            VkBuffer getIndexBuffer();
             void destroyModel();
 
             VkImageView getTextureImageView();
             VkSampler getTextureSampler();
 
+            uint32_t getIndexCount();
 
         protected:
             void loadModel(std::string path);
-
             void loadTexture(std::string path);
-
             void createVertexBuffer();
-
+            void createIndexBuffer();
             void createTextureImage(std::string path);
 
-            void generateMipmaps(VkImage image, int32_t tex_width, int32_t tex_height, VkFormat format, uint32_t mip_levels);
+            void generateMipmaps(VkImage image, int32_t tex_width, int32_t tex_height, 
+                VkFormat format, uint32_t mip_levels);
 
             void transitionImageLayout(VkImage image, VkFormat format,
                 VkImageLayout old_layout, VkImageLayout new_layout, uint32_t mip_levels);
 
             void createTextureImageView();
-
             void createTextureSampler();
 
         private:
@@ -49,6 +48,8 @@ namespace KMDM
 
             // Indices
             std::vector<uint32_t> m_indices;
+            VkBuffer m_indexBuffer;
+            VkDeviceMemory m_indexBufferMemory;
 
             // Texture
             VkImage m_textureImage;

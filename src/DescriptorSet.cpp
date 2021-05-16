@@ -9,6 +9,7 @@
 #include <array>
 #include <vector>
 #include <stdexcept>
+#include <iostream>
 
 
 namespace KMDM
@@ -57,6 +58,20 @@ namespace KMDM
         {
             throw std::runtime_error("Failed to create descriptor set layout.");
         }        
+    }
+    
+    DescriptorSet::~DescriptorSet()
+    {
+        destoryDescriptorSet();
+    }
+
+    void DescriptorSet::destoryDescriptorSet()
+    {
+        std::cout << "- Cleaning up descriptor pool." << std::endl;
+        vkDestroyDescriptorPool(m_logicalDevice->getLogicalDevice(), m_descriptorPool, nullptr);
+
+        std::cout << "- Cleaning up descriptor set layout." << std::endl;
+        vkDestroyDescriptorSetLayout(m_logicalDevice->getLogicalDevice(), m_layout, nullptr);     
     }
 
     /**

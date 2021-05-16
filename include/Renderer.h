@@ -36,6 +36,10 @@ namespace KMDM
             void recreateSwapChain();
             void createDepthResources();
             void createCameraBuffers();
+
+            void cleanupDepthResources();
+            void cleanupSyncObjects();
+            void cleanupCameraBuffers();
            
 
         private:
@@ -81,7 +85,8 @@ namespace KMDM
 
             // Camera buffer.
             // CameraData m_cameraData;
-            std::vector<AllocatedBuffer> m_cameraBuffers;
+            std::vector<VkBuffer> m_cameraBuffers;
+            std::vector<VkDeviceMemory> m_cameraMemory;
 
             // Descriptor set vector.
             std::vector<VkDescriptorSet> m_descriptorSets;

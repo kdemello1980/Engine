@@ -20,7 +20,7 @@ namespace KMDM
 
             VkPipeline* getPipeline();
             VkPipelineLayout* getPipelineLayout();
-            DescriptorPool getDescriptorPool();
+
 
         protected:
             void createGraphicsPipeline();

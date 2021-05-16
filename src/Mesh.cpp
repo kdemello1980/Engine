@@ -41,14 +41,23 @@ namespace KMDM
         m_vertexBuffer = m.m_vertexBuffer;
         m_indices = m.m_indices;
         m_vertices = m.m_vertices;
-        m_material = m.m_material;
         m_name = m.m_name;
         m_transformMatrix = m.m_transformMatrix;
     }
 
     Mesh::~Mesh()
     {
+       destroyMesh();
+    }
 
+    void Mesh::destroyMesh()
+    {
+        Allocator::getInstance()->cleanupAllcatedBuffer(m_vertexBuffer);
+        Allocator::getInstance()->cleanupAllcatedBuffer(m_indexBuffer);
+        vkDestroyImageView(LogicalDevice::getInstance()->getLogicalDevice(),
+            m_textureImageView, nullptr);
+        vmaDestroyImage(Allocator::getInstance()->getAllocator(),
+            m_textureImage.image, m_textureImage.allocation);        
     }
 
 
@@ -171,16 +180,6 @@ namespace KMDM
     void Mesh::setName(const std::string name)
     {
         m_name = name;
-    }
-
-    /**
-     * @brief 
-     * 
-     * @param material 
-     */
-    void Mesh::setMaterial(Material material)
-    {
-        m_material = material;
     }
 
     /**
