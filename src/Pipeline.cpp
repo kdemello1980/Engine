@@ -205,21 +205,22 @@ namespace KMDM
 
         // Pipeline layout.
         VkDescriptorSetLayout layouts[] = {
-            m_descriptorSet->getLayout()
+            m_descriptorSet->getSceneLayout(),
+            m_descriptorSet->getModelLayout()
         };
 
         // Push constants.
-        VkPushConstantRange pushConstant = {};
-        pushConstant.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-        pushConstant.offset = 0;
-        pushConstant.size = sizeof(CameraData);
+        // VkPushConstantRange pushConstant = {};
+        // pushConstant.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+        // pushConstant.offset = 0;
+        // pushConstant.size = sizeof(CameraData);
 
         VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        pipelineLayoutInfo.setLayoutCount = 1;
+        pipelineLayoutInfo.setLayoutCount = 2;
         pipelineLayoutInfo.pSetLayouts = layouts;
-        pipelineLayoutInfo.pushConstantRangeCount = 1;
-        pipelineLayoutInfo.pPushConstantRanges = &pushConstant;
+        pipelineLayoutInfo.pushConstantRangeCount = 0;
+        pipelineLayoutInfo.pPushConstantRanges = nullptr;
 
         // Depth stencil.
         VkPipelineDepthStencilStateCreateInfo depthStencil = {};
