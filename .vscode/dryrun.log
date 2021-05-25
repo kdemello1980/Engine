@@ -1,4 +1,4 @@
-make -f "/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile" --dry-run --keep-going --print-directory
+make -f "/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile" --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/data/home/kenneth/Desktop/Programming/vulkan/Engine'
 make: Nothing to be done for 'Release'.
 make: Leaving directory '/data/home/kenneth/Desktop/Programming/vulkan/Engine'

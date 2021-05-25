@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 16 10:16:53 2021
+# Make data base, printed on Tue May 18 10:35:09 2021
 
 # Variables
 
@@ -25,7 +25,7 @@ NO_AT_BRIDGE = 1
 # environment
 GTK_RC_FILES = /etc/gtk/gtkrc:/data/home/kenneth/.gtkrc:/data/home/kenneth/.config/gtkrc
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1001/vscode-ipc-87ccdc02-2798-403e-96f7-3970d9f355cc.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1001/vscode-ipc-411a6cb4-e00b-445d-b181-c30400945c86.sock
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 9)
 SRC_DIR := src
 # environment
@@ -75,7 +75,7 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session5
 # environment
 PROFILEREAD = true
 # environment
@@ -83,7 +83,7 @@ SSH_ASKPASS = /usr/libexec/ssh/ssh-askpass
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1001/xauth_BBWkRe
+XAUTHORITY = /run/user/1001/xauth_XiyRxh
 # default
 .LOADED := 
 # environment
@@ -161,7 +161,7 @@ LESSOPEN = lessopen.sh %s
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-cLk5j7b41sHD/agent.18477
+SSH_AUTH_SOCK = /tmp/ssh-8o7fVrCIJFpZ/agent.20232
 # default
 .SHELLFLAGS := -c
 # environment
@@ -171,7 +171,7 @@ XDG_CONFIG_DIRS = /etc/xdg:/usr/etc/xdg
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-XCURSOR_THEME = Adwaita
+XCURSOR_THEME = breeze_cursors
 # environment
 LESSKEY = /usr/etc/lesskey.bin
 # environment
@@ -187,7 +187,7 @@ VSCODE_VERBOSE_LOGGING = true
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 15)
 OBJD = src/Debug
 # environment
-VSCODE_PID = 1865
+VSCODE_PID = 21847
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -199,7 +199,7 @@ INPUT_METHOD = ibus
 # environment
 SDK_HOME = /usr/lib64/jvm/java
 # environment
-SESSION_MANAGER = local/alcyone:@/tmp/.ICE-unix/18656,unix/alcyone:/tmp/.ICE-unix/18656
+SESSION_MANAGER = local/alcyone:@/tmp/.ICE-unix/20402,unix/alcyone:/tmp/.ICE-unix/20402
 # automatic
 *F = $(notdir $*)
 # environment
@@ -364,7 +364,7 @@ DEBUGINFOD_URLS = https://debuginfod.opensuse.org/
 # environment
 CVS_RSH = ssh
 # environment
-SSH_AGENT_PID = 18571
+SSH_AGENT_PID = 20313
 # environment
 PAGER = less
 # environment
@@ -379,6 +379,7 @@ define BASH_FUNC_mc%%
 }
 endef
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 1)
+ 
 CFLAGS = -Wall -std=c++20 -O2
 # environment
 G_BROKEN_FILENAMES = 1
@@ -411,7 +412,7 @@ TERM = xterm
 # makefile (from '/data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile', line 7)
 GLSLC = /data/system-software/glslc/bin/glslc
 # environment
-XDG_SESSION_ID = 5
+XDG_SESSION_ID = 6
 # environment
 XCURSOR_SIZE = 32
 # default
@@ -528,7 +529,6 @@ Renderpassdebug:
 # Not a target:
 /data/home/kenneth/Desktop/Programming/vulkan/Engine/Makefile:
 #  Implicit rule search has been done.
- 
 #  Last modified 2021-05-16 10:16:21.459503577
 #  File has been updated.
 #  Successfully updated.
@@ -692,10 +692,11 @@ LogicalDeviceDebug:
 
 # strcache buffers: 1 (0) / strings = 30 / storage = 419 B / avg = 13 B
 # current buf: size = 8162 B / used = 419 B / count = 30 / avg = 13 B
+ 
 
 # strcache performance: lookups = 76 / hit rate = 60%
 # hash-table stats:
 # Load=30/8192=0%, Rehash=0, Collisions=0/76=0%
-# Finished Make data base on Sun May 16 10:16:53 2021
+# Finished Make data base on Tue May 18 10:35:09 2021
 
  

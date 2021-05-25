@@ -18,6 +18,7 @@
 #include <array>
 #include <iostream>
 #include <stdexcept>
+#include <chrono>
 
 // #define GLFW_INCLUDE_VULKAN
 // #include <GLFW/glfw3.h>
@@ -37,6 +38,7 @@ namespace KMDM
      */
     Renderer::Renderer()
     {
+        m_currentFrame = 0;
         m_window = Window::getInstance();
         m_instance = Instance::getInstance();
         m_surface = Surface::getInstance();
@@ -48,21 +50,21 @@ namespace KMDM
         // Get the number of swapchain images.
         m_numFramebuffers = static_cast<size_t>(m_swapChain->getSwapChainImages().size());
 
+        // Initialize synchronization objects.
+        createSyncObjects();
+
         m_renderPass = new Renderpass();
         m_descriptorSet = new DescriptorSet(m_renderPass);
         m_graphicsPipeline = new Pipeline(m_renderPass, m_descriptorSet);
-
-        // Create the command buffers.
-        createCommandBuffers();
-
+        
         // Create depth buffer before the framebuffers.
         createDepthResources();
 
         // Create the framebuffers.
         createFrameBuffers();
 
-        // Initialize synchronization objects.
-        createSyncObjects();
+        // Create the command buffers.
+        createCommandBuffers();
 
         // Create the camera buffer.
         createCameraBuffers();
@@ -80,7 +82,7 @@ namespace KMDM
      */
     void Renderer::destroyRenderer()
     {
-        // vkDeviceWaitIdle(m_logicalDevice->getLogicalDevice());
+        // vkm_logicalDevice->getLogicalDevice()WaitIdle(m_logicalDevice->getLogicalDevice());
         std::cout << "- Cleaning up Renderer." << std::endl;
 
         cleanupDepthResources();
@@ -186,7 +188,7 @@ namespace KMDM
         //     VK_IMAGE_TILING_OPTIMAL,
         //     VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
         //     VMA_MEMORY_USAGE_GPU_ONLY,
-        //     VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+        //     VK_MEMORY_PROPERTY_m_logicalDevice->getLogicalDevice()_LOCAL_BIT
         // );
 
 
@@ -234,7 +236,7 @@ namespace KMDM
 
         for (size_t i = 0; i < size; i++)
         {
-            createBuffer(sizeof(CameraData), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, 
+            createBuffer(sizeof(UniformBufferObject), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, 
                 VK_MEMORY_PROPERTY_HOST_COHERENT_BIT | VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
                 m_cameraBuffers[i], m_cameraMemory[i] );
         }
@@ -263,13 +265,10 @@ namespace KMDM
      */
     void Renderer::drawFrame()
     {
-        // Get the current frame.
-        size_t currentFrame = m_frameSyncObjects.currentFrame;
-
         // Wait for the fence.
         vkWaitForFences(m_logicalDevice->getLogicalDevice(),
             1,
-            &m_frameSyncObjects.inflightFences[currentFrame],
+            &m_frameSyncObjects.inflightFences[m_currentFrame],
             VK_TRUE,
             UINT64_MAX);
 
@@ -279,7 +278,7 @@ namespace KMDM
             m_logicalDevice->getLogicalDevice(),
             m_swapChain->getSwapChain(),
             UINT64_MAX,
-            m_frameSyncObjects.imageAvailableSemaphores[currentFrame],
+            m_frameSyncObjects.imageAvailableSemaphores[m_currentFrame],
             VK_NULL_HANDLE,
             &imageIndex);
 
@@ -302,16 +301,16 @@ namespace KMDM
                 VK_TRUE,
                 UINT64_MAX);
         }
-        m_frameSyncObjects.imagesInFlight[imageIndex] =  m_frameSyncObjects.inflightFences[currentFrame];
+        m_frameSyncObjects.imagesInFlight[imageIndex] =  m_frameSyncObjects.inflightFences[m_currentFrame];
 
         // Update the uniform buffer associaged with the image.
-        //updateUniformBuffer(imageIndex);
+        updateUniformBuffer(imageIndex);
 
         // Submit the command buffer.
         VkSubmitInfo submitInfo = {};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-        VkSemaphore waitSemaphores[] = {m_frameSyncObjects.imageAvailableSemaphores[currentFrame]};
+        VkSemaphore waitSemaphores[] = {m_frameSyncObjects.imageAvailableSemaphores[m_currentFrame]};
         VkPipelineStageFlags waitstages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
         submitInfo.waitSemaphoreCount = 1;
         submitInfo.pWaitSemaphores = waitSemaphores;
@@ -320,15 +319,15 @@ namespace KMDM
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = &m_drawCommandBuffers[imageIndex]; // Need to incorporate command buffers.
 
-        VkSemaphore signalSemaphores[] = {m_frameSyncObjects.renderFinishedSemaphores[currentFrame]};
+        VkSemaphore signalSemaphores[] = {m_frameSyncObjects.renderFinishedSemaphores[m_currentFrame]};
         submitInfo.signalSemaphoreCount = 1;
         submitInfo.pSignalSemaphores = signalSemaphores;
 
-        vkResetFences(m_logicalDevice->getLogicalDevice(), 1, &m_frameSyncObjects.inflightFences[currentFrame]);
+        vkResetFences(m_logicalDevice->getLogicalDevice(), 1, &m_frameSyncObjects.inflightFences[m_currentFrame]);
 
         // Submit to the graphics queue.
         if (vkQueueSubmit(m_logicalDevice->getGraphicsQueue(), 1, &submitInfo,
-            m_frameSyncObjects.inflightFences[currentFrame]) != VK_SUCCESS)
+            m_frameSyncObjects.inflightFences[m_currentFrame]) != VK_SUCCESS)
         {
             throw std::runtime_error("Failed to submit draw command buffer.");
         }
@@ -355,8 +354,8 @@ namespace KMDM
         }
 
         vkQueueWaitIdle(m_logicalDevice->getPresentationQueue());
-        m_descriptorSet->resetDescriptorPool();
-        m_frameSyncObjects.incrementFrame();
+            m_descriptorSet->resetDescriptorPools();
+            m_currentFrame = (m_currentFrame += 1) % MAX_FRAMES_IN_FLIGHT;
     } /// drawFrame
 
   
@@ -366,13 +365,16 @@ namespace KMDM
      */
     void Renderer::createSyncObjects()
     {
+        m_frameSyncObjects = {};
         m_frameSyncObjects.imageAvailableSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
         m_frameSyncObjects.renderFinishedSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
         m_frameSyncObjects.inflightFences.resize(MAX_FRAMES_IN_FLIGHT);
         m_frameSyncObjects.imagesInFlight.resize(m_swapChain->getSwapChainImages().size(), VK_NULL_HANDLE);
+        
 
         VkSemaphoreCreateInfo semaphoreInfo = {};
         semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+        
 
         VkFenceCreateInfo fenceInfo = {};
         fenceInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
@@ -440,11 +442,15 @@ namespace KMDM
             throw std::runtime_error("Failed to allocate command buffers.");
         }
 
-        // Do something with a descriptor set.
-        std::vector<VkDescriptorSet> descriptorSets = m_descriptorSet->getDescriptorSets();
+        // Update the descriptor sets for the scene.
+        std::vector<VkDescriptorSet> sceneDescriptorSets = m_descriptorSet->getSceneDescriptorSets(
+            static_cast<uint32_t>(m_swapChain->getSwapChainImages().size()), m_gpuSceneData, m_uniformBuffers);
+
+        // Update tdhe descriptor sets for the models.
+        std::vector<Model> models = Scene::getInstance()->getMeshes();
+        std::vector<VkDescriptorSet> modelSets = m_descriptorSet->getModelDescriptorSets(models);
 
         // Begin recording command buffers.
-        size_t bindingIndex = 0;
         for (size_t i = 0; i < m_drawCommandBuffers.size(); i++)
         {
             VkCommandBufferBeginInfo beginInfo = {};
@@ -476,33 +482,32 @@ namespace KMDM
 
             // Bind the graphics pipeline.
             vkCmdBindPipeline(m_drawCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, *m_graphicsPipeline->getPipeline());
+            vkCmdBindVertexBuffers(m_drawCommandBuffers[i], 0, 1, &m_uniformBuffers[i], 0);
 
-// This should be where we deal with dynamic storage buffers for streaming our geometry into a single draw call
-// rather than calling an individual draw call for each individual mesh.
-
-            for (auto & mesh : Scene::getInstance()->getMeshes())
+            // vkCmdPushConstants(m_drawCommandBuffers[i], *m_graphicsPipeline->getPipelineLayout(),
+            //     VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(CameraData), &m_cameraBuffers[i]);
+            vkCmdBindDescriptorSets(m_drawCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, 
+                *m_graphicsPipeline->getPipelineLayout(), 0, 1, &sceneDescriptorSets[i], 0, nullptr);
+            
+            for (size_t j = 0; j < models.size(); j++)
             {
                 // Bind the vertex & index buffers.
                 // vertexBuffers.push_back(mesh.getVertexBuffer());
                 // indexBuffers.
-                VkDeviceSize offsets[] = {0};
-                VkBuffer buffers[] =  { mesh.getVertexBuffer() };
-                vkCmdBindVertexBuffers(m_drawCommandBuffers[i], 0, 1, buffers, offsets);
-                vkCmdBindIndexBuffer(m_drawCommandBuffers[i], mesh.getIndexBuffer(), 0, VK_INDEX_TYPE_UINT32);
+                VkBuffer buffers[] =  { *models[j].getVertexBuffer() };
+                vkCmdBindVertexBuffers(m_drawCommandBuffers[j], 0, 1, buffers, 0);
+                vkCmdBindIndexBuffer(m_drawCommandBuffers[j], *models[i].getIndexBuffer(), 0, VK_INDEX_TYPE_UINT32);
                 
                 // Bind the UBO descriptor sets.
-                vkCmdBindDescriptorSets(m_drawCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, 
-                    *m_graphicsPipeline->getPipelineLayout(), 0, 1, &descriptorSets[bindingIndex],
+                vkCmdBindDescriptorSets(m_drawCommandBuffers[j], VK_PIPELINE_BIND_POINT_GRAPHICS, 
+                    *m_graphicsPipeline->getPipelineLayout(), 0, 1, &modelSets[j],
                     0, nullptr);
-                bindingIndex++;
 
                 // Draw.
                 // vkCmdDraw(m_drawCommandBuffers[i], 3, 1, 0, 0);
 
-                vkCmdDrawIndexed(m_drawCommandBuffers[i], mesh.getIndexCount(), 1, 0, 0, 0);
-
+                vkCmdDrawIndexed(m_drawCommandBuffers[j], models[j].getIndexCount(), 1, 0, 0, 0);
             }
-
             vkCmdEndRenderPass(m_drawCommandBuffers[i]);
 
             if (vkEndCommandBuffer(m_drawCommandBuffers[i]) != VK_SUCCESS)
@@ -514,6 +519,7 @@ namespace KMDM
 
     void Renderer::run()
     {
+        
         SDL_Event event;
         while(true)
         {
@@ -525,7 +531,79 @@ namespace KMDM
                     // m_window->destoryWindow();
                 }
             }
+            createCommandBuffers();
             drawFrame();
         }
+    }
+
+    /**
+     * @brief Create the uniform buffers.
+     * 
+     */
+    void Renderer::createUniformBuffers()
+    {
+        VkDeviceSize size = sizeof(UniformBufferObject);
+        m_uniformBuffers.resize(m_swapChain->getSwapChainImages().size());
+        m_uniformBufferMemory.resize(m_swapChain->getSwapChainImages().size());
+
+        for (size_t i = 0; i < m_swapChain->getSwapChainImages().size(); i++)
+        {
+            createBuffer(size, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT |
+                VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, m_uniformBuffers[i], m_uniformBufferMemory[i]);
+        }
+    }
+
+    /**
+     * @brief Create the GPUSceneData buffers.
+     * 
+     */
+    void Renderer::createGPUSceneBuffers()
+    {
+        VkDeviceSize size = sizeof(GPUSceneData);
+        m_gpuSceneData.resize(m_swapChain->getSwapChainImages().size());
+        m_gpuSceneMemory.resize(m_swapChain->getSwapChainImages().size());
+
+        for (size_t i = 0; i < m_swapChain->getSwapChainImages().size(); i++)
+        {
+            createBuffer(size, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_COHERENT_BIT |
+                VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, m_gpuSceneData[i], m_gpuSceneMemory[i]);
+        }
+    }
+
+    void Renderer::cleanupGPUSceneBuffers()
+    {
+        for (size_t i = 0; i < m_gpuSceneData.size(); i++)
+        {
+            vkDestroyBuffer(m_logicalDevice->getLogicalDevice(), m_gpuSceneData[i], nullptr);
+        }
+        for (size_t i = 0; i < m_gpuSceneMemory.size(); i++)
+        {
+            vkFreeMemory(m_logicalDevice->getLogicalDevice(), m_gpuSceneMemory[i], nullptr);
+        }
+    }
+
+    /**
+     * @brief Update the uniform buffer.
+     * 
+     * @param currentImage 
+     */
+    void Renderer::updateUniformBuffer(uint32_t currentImage) 
+    {
+        static auto startTime = std::chrono::high_resolution_clock::now();
+
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+        UniformBufferObject ubo = {};
+        ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.proj = glm::perspective(glm::radians(45.0f), m_swapChain->getSwapChainExtent().width / 
+            (float) m_swapChain->getSwapChainExtent().height, 0.1f, 10.0f);
+        ubo.proj[1][1] *= -1;
+
+        void* data;
+        vkMapMemory(m_logicalDevice->getLogicalDevice(), m_uniformBufferMemory[currentImage], 0, sizeof(ubo), 0, &data);
+            memcpy(data, &ubo, sizeof(ubo));
+        vkUnmapMemory(m_logicalDevice->getLogicalDevice(), m_uniformBufferMemory[currentImage]);
     }
 }

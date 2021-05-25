@@ -36,11 +36,16 @@ namespace KMDM
             void recreateSwapChain();
             void createDepthResources();
             void createCameraBuffers();
+            void createUniformBuffers();
+            void createGPUSceneBuffers();
+
+            void updateUniformBuffer(uint32_t currentImage);
 
             void cleanupDepthResources();
             void cleanupSyncObjects();
             void cleanupCameraBuffers();
-           
+            void cleanupGPUSceneBuffers();
+
 
         private:
             Renderer();
@@ -90,6 +95,17 @@ namespace KMDM
 
             // Descriptor set vector.
             std::vector<VkDescriptorSet> m_descriptorSets;
+
+            // The current frame.
+            size_t m_currentFrame;
+
+            // Uniform Buffers.
+            std::vector<VkBuffer> m_uniformBuffers;
+            std::vector<VkDeviceMemory> m_uniformBufferMemory;
+
+            // Scene data.
+            std::vector<VkBuffer> m_gpuSceneData;
+            std::vector<VkDeviceMemory> m_gpuSceneMemory;
     };
 }
 #endif // RENDERER_H

@@ -15,14 +15,16 @@ namespace KMDM
             Model(std::string model_path, std::string texture_path);
             virtual ~Model();
 
-            VkBuffer getVertexBuffer();
-            VkBuffer getIndexBuffer();
+            VkBuffer* getVertexBuffer();
+            VkBuffer* getIndexBuffer();
             void destroyModel();
 
             VkImageView getTextureImageView();
             VkSampler getTextureSampler();
 
             uint32_t getIndexCount();
+
+            VkBuffer getTranslationMatrix();
 
         protected:
             void loadModel(std::string path);
@@ -57,6 +59,13 @@ namespace KMDM
             VkImageView m_textureImageView;
             VkSampler m_textureImageSampler;
             uint32_t m_mipLevels;
+
+            // Translation buffer.
+            VkBuffer m_translationBufffer;
+            VkDeviceMemory m_translationMemory;
+
+            // Descriptor
+            VkDescriptorSet m_descriptorSet;
     };
 }
 

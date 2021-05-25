@@ -13,6 +13,9 @@ int main()
     {
         std::cerr << e.what() << '\n';
     }
+
+    // Need a load scene function, and a stop function to 
+    // allow the new scene to load.
     render->run();
 
 

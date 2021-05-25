@@ -24,7 +24,7 @@ namespace KMDM
 
     Scene::Scene()
     {
-        Model m = Model(std::string("models/Indonesian_statue.stl"), std::string("head"));
+        Model m = Model(std::string("models/viking_room.obj"), std::string("models/viking_room.png"));
         m_meshes.push_back(m);
     }
 

@@ -18,6 +18,7 @@ namespace KMDM
     {
         loadModel(model_path);
         createVertexBuffer();
+        createIndexBuffer();
         createTextureImage(texture_path);
         createTextureImageView();
         createTextureSampler();
@@ -39,7 +40,7 @@ namespace KMDM
 
     Model::~Model()
     {
-        destroyModel();
+        // destroyModel();
     }
 
     /******************************************************************
@@ -415,6 +416,9 @@ namespace KMDM
     } /// createTextureSampler
 
     uint32_t Model::getIndexCount() { return static_cast<uint32_t>(m_indices.size()); }
-    VkBuffer Model::getVertexBuffer() { return m_vertexBuffer; }
-    VkBuffer Model::getIndexBuffer() { return m_indexBuffer; }
+    VkBuffer* Model::getVertexBuffer() { return &m_vertexBuffer; }
+    VkBuffer* Model::getIndexBuffer() { return &m_indexBuffer; }
+    VkImageView Model::getTextureImageView() { return m_textureImageView; }
+    VkSampler Model::getTextureSampler() { return m_textureImageSampler; }
+    VkBuffer Model::getTranslationMatrix() { return m_translationBufffer; }
 }

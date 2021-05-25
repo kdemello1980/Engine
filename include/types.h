@@ -83,16 +83,15 @@ namespace KMDM
         glm::mat4 proj;
     };
 
-
     /**
-     * @brief Structure to hold the camera data.
+     * @brief Per-model transforms.
      * 
      */
-    struct CameraData
+    struct TransformBufferObject
     {
-        glm::mat4 view;
-        glm::mat4 projection;
-        glm::mat4 viewproj;
+        glm::mat4 translate;
+        glm::mat4 rotate;
+        glm::float32 scale;
     };
 
 /******************************************************************************/
