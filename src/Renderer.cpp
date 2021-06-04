@@ -63,11 +63,17 @@ namespace KMDM
         // Create the framebuffers.
         createFrameBuffers();
 
-        // Create the command buffers.
-        createCommandBuffers();
-
         // Create the camera buffer.
         createCameraBuffers();
+
+        // Create gpu scene buffers.
+        createGPUSceneBuffers();
+
+        // Create uniform buffers.
+        createUniformBuffers();
+
+        // Create the command buffers.
+        createCommandBuffers();
     }
 
     void Renderer::recreateSwapChain()

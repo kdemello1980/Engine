@@ -32,6 +32,7 @@ namespace KMDM
             void createVertexBuffer();
             void createIndexBuffer();
             void createTextureImage(std::string path);
+            void creatteTransBuffer();
 
             void generateMipmaps(VkImage image, int32_t tex_width, int32_t tex_height, 
                 VkFormat format, uint32_t mip_levels);
@@ -63,6 +64,7 @@ namespace KMDM
             // Translation buffer.
             VkBuffer m_translationBufffer;
             VkDeviceMemory m_translationMemory;
+            TransformBufferObject m_transBufferObj;
 
             // Descriptor
             VkDescriptorSet m_descriptorSet;

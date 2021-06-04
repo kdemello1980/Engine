@@ -12,6 +12,8 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>
 
+#include <glm/glm.hpp>
+
 namespace KMDM
 {
     Model::Model(std::string model_path, std::string texture_path)
@@ -22,6 +24,12 @@ namespace KMDM
         createTextureImage(texture_path);
         createTextureImageView();
         createTextureSampler();
+
+        m_transBufferObj.rotate = glm::mat4(1.0);
+        m_transBufferObj.scale = glm::float32(1.0);
+        m_transBufferObj.translate = glm::mat4(1.0);
+
+        creatteTransBuffer();
     }
 
     void Model::destroyModel()
@@ -131,7 +139,10 @@ namespace KMDM
         vkFreeMemory(LogicalDevice::getInstance()->getLogicalDevice(), stagingMemory, nullptr);
     } /// createVertexBuffer
 
-
+    /**
+     * @brief Create the index buffer and load it into device memory.
+     * 
+     */
     void Model::createIndexBuffer()
     {
         VkDeviceSize bufferSize = sizeof(m_indices[0]) * m_indices.size();
@@ -152,7 +163,35 @@ namespace KMDM
         copyBuffer(stagingBuffer, m_indexBuffer, bufferSize);
 
         vkDestroyBuffer(LogicalDevice::getInstance()->getLogicalDevice(), stagingBuffer, nullptr);
-        vkFreeMemory(LogicalDevice::getInstance()->getLogicalDevice(), m_indexBufferMemory, nullptr);
+        vkFreeMemory(LogicalDevice::getInstance()->getLogicalDevice(), stagingMemory, nullptr);
+    }
+
+    /**
+     * @brief Create the translation buffer object.
+     * 
+     */
+    void Model::creatteTransBuffer()
+    {
+        VkDeviceSize bufferSize = sizeof(m_transBufferObj);
+        VkBuffer stagingBuffer;
+        VkDeviceMemory stagingMemory;
+
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+            | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingMemory);
+        
+        void *data;
+        vkMapMemory(LogicalDevice::getInstance()->getLogicalDevice(), stagingMemory, 0, bufferSize, 0, &data);
+        memcpy(data, &m_transBufferObj, (size_t)bufferSize);
+        vkUnmapMemory(LogicalDevice::getInstance()->getLogicalDevice(), stagingMemory);
+
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT |
+            VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, 
+            m_translationBufffer, m_translationMemory);
+        
+        copyBuffer(stagingBuffer, m_translationBufffer, bufferSize);
+
+        vkDestroyBuffer(LogicalDevice::getInstance()->getLogicalDevice(), stagingBuffer, nullptr);
+        vkFreeMemory(LogicalDevice::getInstance()->getLogicalDevice(), stagingMemory, nullptr);
     }
 
     /******************************************************************

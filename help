@@ -1,0 +1,16 @@
+glm::mat4x4 view{ 2 / (right - left), 0, 0, 0,
+            0, 2 / (top - bottom), 0, 0,
+            0, 0, -2 / (farplane - nearplane), 0,
+            -((right + left) / (right - left)), -((top + bottom) / (top - bottom)), -((farplane + nearplane) / (farplane - nearplane)), 1
+        };
+
+
+glm::mat4 view{ 2 / (right - left), 0, 0, 0,
+            0, 2 / (top - bottom), 0, 0,
+            0, 0, -2 / (farplane - nearplane), 0,
+            -((right + left) / (right - left)), -((top + bottom) / (top - bottom)), -((farplane + nearplane) / (farplane - nearplane)), 1
+        };
+
+glm::uvec4 ViewPort(0,0,0,0);
+
+glm::vec3 Origin(0.0f, 0.0f, 0.0f);

@@ -7,7 +7,7 @@ layout(location = 0) out vec4 outColor;
 // Get the texture.
 layout(location = 1) in vec2 fragTexCoord;
 // layout(binding = 1 ) uniform sampler2D texSampler;
-layout(set = 0, binding = 2) uniform sampler2D texSampler;
+layout(set = 1, binding = 1) uniform sampler2D texSampler;
 
 void main()
 {

@@ -23,7 +23,7 @@ namespace KMDM
     DescriptorSet::DescriptorSet(Renderpass* renderpass)
     {
         m_renderPass = renderpass;
-        createEnvPool();
+        createScenePool();
         createModelPool();
 
         VkDescriptorSetLayoutBinding sceneLayoutBindings[] = {
@@ -83,6 +83,10 @@ namespace KMDM
             throw std::runtime_error("Failed to create model descriptor set layout.");
         }  
         std::cout << "Created model descriptor set layout." << std::endl;  
+
+        // Create the descriptor pools.
+        createModelPool();
+        createScenePool();
     }
     
     /**
@@ -118,7 +122,7 @@ namespace KMDM
      * @brief Create the descriptor pool for per-frame environment objects.
      * 
      */
-    void DescriptorSet::createEnvPool()
+    void DescriptorSet::createScenePool()
     {
         std::vector<VkDescriptorPoolSize> sizes;
         sizes.resize(2);
@@ -131,7 +135,7 @@ namespace KMDM
         sizes[1].descriptorCount = count;
         sizes[1].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
 
-        createDescriptorPool(count, m_renderPass, m_sceneDescriptorPool, sizes);
+        createDescriptorPool(count, m_renderPass, &m_sceneDescriptorPool, sizes);
     }
 
     /**
@@ -149,7 +153,7 @@ namespace KMDM
         sizes[1].descriptorCount = MAX_DESCRIPTORS / 2;
         sizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
 
-        createDescriptorPool(MAX_DESCRIPTORS, m_renderPass, m_modelDescriptorPool, sizes);
+        createDescriptorPool(MAX_DESCRIPTORS, m_renderPass, &m_modelDescriptorPool, sizes);
     }
     
     
@@ -159,7 +163,7 @@ namespace KMDM
      * @param renderpass 
      */
     void DescriptorSet::createDescriptorPool(uint32_t numDescriptors, Renderpass* renderpass, 
-                VkDescriptorPool pool, std::vector<VkDescriptorPoolSize> sizes)
+                VkDescriptorPool* pool, std::vector<VkDescriptorPoolSize> sizes)
     {
         m_logicalDevice = LogicalDevice::getInstance();
 
@@ -184,7 +188,7 @@ namespace KMDM
         poolInfo.pPoolSizes = sizes.data();
 
         if (vkCreateDescriptorPool(m_logicalDevice->getLogicalDevice(), &poolInfo, nullptr,
-            &pool) != VK_SUCCESS)
+            pool) != VK_SUCCESS)
         {
             throw std::runtime_error("Failed to create descriptor pool.");
         }
@@ -233,7 +237,7 @@ namespace KMDM
             uniformBufferInfo.offset = 0;
             uniformBufferInfo.range = sizeof(UniformBufferObject);
 
-            std::array<VkWriteDescriptorSet, 2> writes;
+            std::array<VkWriteDescriptorSet, 2> writes{};
             writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
             writes[0].dstSet = sets[i];
             writes[0].dstBinding = 0;
@@ -297,7 +301,7 @@ namespace KMDM
             modelImageInfo.imageView = models[i].getTextureImageView();
             modelImageInfo.sampler = models[i].getTextureSampler();
 
-            std::array<VkWriteDescriptorSet, 2> writes;
+            std::array<VkWriteDescriptorSet, 2> writes{};
             writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
             writes[0].dstSet = sets[i];
             writes[0].dstBinding = 0;

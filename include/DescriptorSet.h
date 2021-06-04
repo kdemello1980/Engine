@@ -37,9 +37,9 @@ namespace KMDM
 
         protected:
             void createDescriptorPool(uint32_t numDescriptors, Renderpass* renderpass, 
-                VkDescriptorPool pool, std::vector<VkDescriptorPoolSize> sizes);
+                VkDescriptorPool* pool, std::vector<VkDescriptorPoolSize> sizes);
             
-            void createEnvPool();
+            void createScenePool();
             void createModelPool();
 
         private:
